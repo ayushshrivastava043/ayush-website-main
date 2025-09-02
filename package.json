@@ -1,0 +1,25 @@
+{
+  "name": "ayush-chatbot-backend",
+  "version": "1.0.0",
+  "description": "Backend server for Ayush's AI Assistant chatbot",
+  "main": "chatbot-server.js",
+  "scripts": {
+    "start": "node chatbot-server.js",
+    "dev": "nodemon chatbot-server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "chatbot",
+    "ai",
+    "assistant",
+    "backend"
+  ],
+  "author": "Ayush",
+  "license": "MIT"
+}

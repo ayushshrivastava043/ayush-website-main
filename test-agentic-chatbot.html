@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Chatbot Integration Test</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00ffee;
+            margin-bottom: 30px;
+        }
+        
+        .status-panel {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        
+        .test-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .test-button {
+            background: #00ffee;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .test-button:hover {
+            background: #00ccbb;
+            transform: translateY(-2px);
+        }
+        
+        .log-container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        
+        .log-success { background: rgba(0, 255, 0, 0.2); }
+        .log-error { background: rgba(255, 0, 0, 0.2); }
+        .log-info { background: rgba(0, 255, 255, 0.2); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Agentic Chatbot Integration Test</h1>
+        
+        <div class="status-panel">
+            <h3>System Status</h3>
+            <div class="status-item">
+                <span>Widget Initialized:</span>
+                <span id="widget-status">Checking...</span>
+            </div>
+            <div class="status-item">
+                <span>API Connected:</span>
+                <span id="api-status">Checking...</span>
+            </div>
+            <div class="status-item">
+                <span>Using Fallback:</span>
+                <span id="fallback-status">Checking...</span>
+            </div>
+            <div class="status-item">
+                <span>Session ID:</span>
+                <span id="session-id">Checking...</span>
+            </div>
+        </div>
+        
+        <div class="test-buttons">
+            <button class="test-button" onclick="testConnection()">Test Connection</button>
+            <button class="test-button" onclick="testSimpleMessage()">Test Simple Message</button>
+            <button class="test-button" onclick="testComplexTask()">Test Complex Task</button>
+            <button class="test-button" onclick="testFileOperation()">Test File Operation</button>
+            <button class="test-button" onclick="showWidget()">Show Widget</button>
+            <button class="test-button" onclick="clearLog()">Clear Log</button>
+        </div>
+        
+        <div class="log-container" id="log-container">
+            <div class="log-entry log-info">🤖 Agentic Chatbot Integration Test Page Loaded</div>
+        </div>
+    </div>
+    
+    <!-- Load configuration first -->
+    <script src="agentic-chatbot-config.js"></script>
+    
+    <!-- Load integration script -->
+    <script src="agentic-chatbot-integration.js"></script>
+    
+    <script>
+        let widget = null;
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            log('Page loaded, initializing agentic chatbot...', 'info');
+            
+            // Wait a moment for scripts to load
+            setTimeout(async () => {
+                try {
+                    // Initialize widget
+                    widget = new AgenticChatbotWidget();
+                    
+                    // Wait for initialization
+                    await new Promise(resolve => {
+                        const checkInit = () => {
+                            if (widget && widget.isInitialized) {
+                                resolve();
+                            } else {
+                                setTimeout(checkInit, 100);
+                            }
+                        };
+                        checkInit();
+                    });
+                    
+                    log('✅ Agentic chatbot widget initialized successfully', 'success');
+                    updateStatus();
+                    
+                } catch (error) {
+                    log(`❌ Initialization error: ${error.message}`, 'error');
+                }
+            }, 1000);
+        });
+        
+        function updateStatus() {
+            if (!widget) return;
+            
+            const status = widget.getStatus();
+            
+            document.getElementById('widget-status').textContent = status.initialized ? '✅ Yes' : '❌ No';
+            document.getElementById('api-status').textContent = status.connected ? '✅ Yes' : '❌ No';
+            document.getElementById('fallback-status').textContent = status.usingFallback ? '⚠️ Yes' : '✅ No';
+            document.getElementById('session-id').textContent = status.sessionId || 'None';
+        }
+        
+        async function testConnection() {
+            log('Testing API connection...', 'info');
+            
+            try {
+                const status = await widget.client.getStatus();
+                if (status.connected) {
+                    log(`✅ Connected to ${status.usingFallback ? 'fallback' : 'primary'} API`, 'success');
+                    log(`Status: ${JSON.stringify(status.status, null, 2)}`, 'info');
+                } else {
+                    log('❌ Not connected to any API', 'error');
+                }
+                updateStatus();
+            } catch (error) {
+                log(`❌ Connection test error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testSimpleMessage() {
+            log('Testing simple message...', 'info');
+            
+            try {
+                const result = await widget.client.sendMessage('Hello, how are you?');
+                if (result.success) {
+                    log(`✅ Simple message test successful`, 'success');
+                    log(`Response: ${result.response}`, 'info');
+                } else {
+                    log(`❌ Simple message test failed: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Simple message test error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testComplexTask() {
+            log('Testing complex task...', 'info');
+            
+            try {
+                const result = await widget.client.sendMessage('Tell me about the backend process and system architecture');
+                if (result.success) {
+                    log(`✅ Complex task test successful`, 'success');
+                    log(`Response: ${result.response}`, 'info');
+                    if (result.metadata) {
+                        log(`Metadata: ${JSON.stringify(result.metadata, null, 2)}`, 'info');
+                    }
+                } else {
+                    log(`❌ Complex task test failed: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Complex task test error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testFileOperation() {
+            log('Testing file operation...', 'info');
+            
+            try {
+                const result = await widget.client.sendMessage('List files in the current directory');
+                if (result.success) {
+                    log(`✅ File operation test successful`, 'success');
+                    log(`Response: ${result.response}`, 'info');
+                } else {
+                    log(`❌ File operation test failed: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ File operation test error: ${error.message}`, 'error');
+            }
+        }
+        
+        function showWidget() {
+            if (widget) {
+                widget.show();
+                log('Widget shown', 'info');
+            } else {
+                log('Widget not initialized', 'error');
+            }
+        }
+        
+        function clearLog() {
+            document.getElementById('log-container').innerHTML = '';
+            log('Log cleared', 'info');
+        }
+        
+        function log(message, type = 'info') {
+            const logContainer = document.getElementById('log-container');
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${type}`;
+            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+    </script>
+</body>
+</html>

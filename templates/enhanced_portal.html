@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Portal - Enhanced Personal Workspace</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Space Theme (Default) */
+        .theme-space {
+            --primary-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            --secondary-bg: rgba(0, 255, 136, 0.1);
+            --accent-color: #00ff88;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(0, 255, 136, 0.3);
+        }
+        
+        /* Ocean Theme */
+        .theme-ocean {
+            --primary-bg: linear-gradient(135deg, #0c1445 0%, #1e3a8a 50%, #0ea5e9 100%);
+            --secondary-bg: rgba(14, 165, 233, 0.1);
+            --accent-color: #0ea5e9;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(14, 165, 233, 0.3);
+        }
+        
+        /* Forest Theme */
+        .theme-forest {
+            --primary-bg: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #16a34a 100%);
+            --secondary-bg: rgba(22, 163, 74, 0.1);
+            --accent-color: #16a34a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(22, 163, 74, 0.3);
+        }
+        
+        /* Sky Theme */
+        .theme-sky {
+            --primary-bg: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+            --secondary-bg: rgba(59, 130, 246, 0.1);
+            --accent-color: #3b82f6;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        .glass-effect {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+        }
+        
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .section-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .portal-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-card {
+                margin-bottom: 1rem;
+            }
+            
+            .profile-avatar {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body class="theme-space min-h-screen text-white overflow-x-hidden">
+    <!-- Floating Particles Background -->
+    <div class="floating-particles" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="glass-effect border-b border-opacity-20 backdrop-blur-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-green-400">
+                        🚀 AI Portal
+                    </h1>
+                    <span class="text-sm opacity-70">Personal Workspace</span>
+                </div>
+                
+                <!-- Theme Switcher -->
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm opacity-70">Theme:</span>
+                    <select id="themeSelector" class="bg-transparent border border-opacity-30 rounded px-2 py-1 text-sm">
+                        <option value="space">🌌 Space</option>
+                        <option value="ocean">🌊 Ocean</option>
+                        <option value="forest">🌲 Forest</option>
+                        <option value="sky">☁️ Sky</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Profile Section -->
+        <section id="profile" class="mb-12">
+            <div class="glass-effect rounded-2xl p-8 text-center">
+                <div class="profile-avatar mx-auto mb-6 bg-gradient-to-br from-cyan-400 to-green-400 flex items-center justify-center text-4xl font-bold">
+                    A
+                </div>
+                <h2 class="text-3xl font-bold mb-4">Ayush</h2>
+                <p class="text-xl opacity-80 mb-4">AI Developer & Tech Enthusiast</p>
+                <div class="flex items-center justify-center space-x-4 text-sm opacity-70">
+                    <span>📍 Currently in AI_Projects</span>
+                    <span>🔄 Status: Building AI Portal</span>
+                </div>
+                
+                <!-- Skills Matrix -->
+                <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="glass-effect rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">🤖</div>
+                        <div class="font-semibold">AI/ML</div>
+                        <div class="text-xs opacity-70">Expert</div>
+                    </div>
+                    <div class="glass-effect rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">💻</div>
+                        <div class="font-semibold">Development</div>
+                        <div class="text-xs opacity-70">Advanced</div>
+                    </div>
+                    <div class="glass-effect rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">🚀</div>
+                        <div class="font-semibold">Innovation</div>
+                        <div class="text-xs opacity-70">Pioneer</div>
+                    </div>
+                    <div class="glass-effect rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">🎯</div>
+                        <div class="font-semibold">Problem Solving</div>
+                        <div class="text-xs opacity-70">Master</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Work Portal Section -->
+        <section id="work-portal" class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center">🏢 Work Portal</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Work Profile -->
+                <div class="section-card glass-effect rounded-2xl p-6">
+                    <div class="text-4xl mb-4">📋</div>
+                    <h3 class="text-xl font-bold mb-3">Work Profile</h3>
+                    <p class="opacity-80 mb-4">Professional portfolio, client testimonials, and project showcase</p>
+                    <button class="w-full bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        View Profile
+                    </button>
+                </div>
+                
+                <!-- Custom Dashboards -->
+                <div class="section-card glass-effect rounded-2xl p-6">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-xl font-bold mb-3">Custom Dashboards</h3>
+                    <p class="opacity-80 mb-4">Server management, AI project monitoring, and log analysis</p>
+                    <button class="w-full bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        Open Dashboards
+                    </button>
+                </div>
+                
+                <!-- Document Creator -->
+                <div class="section-card glass-effect rounded-2xl p-6">
+                    <div class="text-4xl mb-4">📄</div>
+                    <h3 class="text-xl font-bold mb-3">Document Creator</h3>
+                    <p class="opacity-80 mb-4">PDF generation, document templates, and export tools</p>
+                    <button class="w-full bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        Create Document
+                    </button>
+                </div>
+                
+                <!-- Server Management -->
+                <div class="section-card glass-effect rounded-2xl p-6">
+                    <div class="text-4xl mb-4">🖥️</div>
+                    <h3 class="text-xl font-bold mb-3">Server Management</h3>
+                    <p class="opacity-80 mb-4">Monitor servers, manage infrastructure, and track performance</p>
+                    <button class="w-full bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        Manage Servers
+                    </button>
+                </div>
+                
+                <!-- AI Project Monitoring -->
+                <div class="section-card glass-effect rounded-2xl p-6">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h3 class="text-xl font-bold mb-3">AI Project Monitoring</h3>
+                    <p class="opacity-80 mb-4">Track AI projects, monitor training, and analyze results</p>
+                    <button class="w-full bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        Monitor Projects
+                    </button>
+                </div>
+                
+                <!-- Log Dashboard -->
+                <div class="section-card glass-effect rounded-2xl p-6">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h3 class="text-xl font-bold mb-3">Log Dashboard</h3>
+                    <p class="opacity-80 mb-4">Real-time log monitoring, AI insights, and system analytics</p>
+                    <button class="w-full bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        View Logs
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Personal Space Section -->
+        <section id="personal-space" class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center">🌌 Personal Space</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- News Section -->
+                <div class="section-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">📰</div>
+                    <h3 class="text-xl font-bold mb-3">News</h3>
+                    <p class="opacity-80 mb-4">Personalized news feed and updates</p>
+                    <button class="w-full bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        Read News
+                    </button>
+                </div>
+                
+                <!-- Media Section -->
+                <div class="section-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">🎵</div>
+                    <h3 class="text-xl font-bold mb-3">Media</h3>
+                    <p class="opacity-80 mb-4">Songs, videos, and playlists</p>
+                    <button class="w-full bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        Open Media
+                    </button>
+                </div>
+                
+                <!-- Avatar Generator -->
+                <div class="section-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">👤</div>
+                    <h3 class="text-xl font-bold mb-3">Avatar Generator</h3>
+                    <p class="opacity-80 mb-4">Create custom avatars and characters</p>
+                    <button class="w-full bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        Generate Avatar
+                    </button>
+                </div>
+                
+                <!-- Custom Sections -->
+                <div class="section-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">✨</div>
+                    <h3 class="text-xl font-bold mb-3">Custom</h3>
+                    <p class="opacity-80 mb-4">Personal projects and hobbies</p>
+                    <button class="w-full bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        Explore
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Interactive Trainer Section -->
+        <section id="interactive-trainer" class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center">🤖 Interactive Trainer</h2>
+            <div class="glass-effect rounded-2xl p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Agentic Chatbot -->
+                    <div class="text-center">
+                        <div class="text-5xl mb-4">🧠</div>
+                        <h3 class="text-xl font-bold mb-3">Agentic Chatbot</h3>
+                        <p class="opacity-80 mb-4">Advanced AI assistant with autonomous capabilities</p>
+                        <button class="bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity">
+                            Train Chatbot
+                        </button>
+                    </div>
+                    
+                    <!-- Beta Testing -->
+                    <div class="text-center">
+                        <div class="text-5xl mb-4">🧪</div>
+                        <h3 class="text-xl font-bold mb-3">Beta Testing</h3>
+                        <p class="opacity-80 mb-4">Test new features and provide feedback</p>
+                        <button class="bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity">
+                            Start Testing
+                        </button>
+                    </div>
+                    
+                    <!-- Training Interface -->
+                    <div class="text-center">
+                        <div class="text-5xl mb-4">🎯</div>
+                        <h3 class="text-xl font-bold mb-3">Training Interface</h3>
+                        <p class="opacity-80 mb-4">Interactive training dashboard and data management</p>
+                        <button class="bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity">
+                            Open Interface
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Hub Section -->
+        <section id="contact-hub" class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center">📞 Contact Hub</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- LinkedIn -->
+                <div class="section-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">💼</div>
+                    <h3 class="text-xl font-bold mb-3">LinkedIn</h3>
+                    <p class="opacity-80 mb-4">Professional networking</p>
+                    <button class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        Connect
+                    </button>
+                </div>
+                
+                <!-- WhatsApp -->
+                <div class="section-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">💬</div>
+                    <h3 class="text-xl font-bold mb-3">WhatsApp</h3>
+                    <p class="opacity-80 mb-4">Direct messaging</p>
+                    <button class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        Message
+                    </button>
+                </div>
+                
+                <!-- Email -->
+                <div class="section-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">📧</div>
+                    <h3 class="text-xl font-bold mb-3">Email</h3>
+                    <p class="opacity-80 mb-4">Professional communication</p>
+                    <button class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        Send Email
+                    </button>
+                </div>
+                
+                <!-- Portfolio -->
+                <div class="section-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">🌐</div>
+                    <h3 class="text-xl font-bold mb-3">Portfolio</h3>
+                    <p class="opacity-80 mb-4">View my work</p>
+                    <button class="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                        View Portfolio
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="glass-effect border-t border-opacity-20 mt-16">
+        <div class="container mx-auto px-4 py-8 text-center">
+            <p class="opacity-70">🚀 AI Portal - Your Personal AI Workspace</p>
+            <p class="text-sm opacity-50 mt-2">Built with cutting-edge AI technology</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Theme Management
+        const themeSelector = document.getElementById('themeSelector');
+        const body = document.body;
+        
+        function setTheme(theme) {
+            body.className = `theme-${theme} min-h-screen text-white overflow-x-hidden`;
+            localStorage.setItem('selectedTheme', theme);
+        }
+        
+        themeSelector.addEventListener('change', (e) => {
+            setTheme(e.target.value);
+        });
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('selectedTheme') || 'space';
+        themeSelector.value = savedTheme;
+        setTheme(savedTheme);
+        
+        // Floating Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Initialize particles
+        createParticles();
+        
+        // Section Navigation
+        document.querySelectorAll('.section-card button').forEach(button => {
+            button.addEventListener('click', function() {
+                const sectionName = this.closest('.section-card').querySelector('h3').textContent;
+                console.log(`Opening: ${sectionName}`);
+                // TODO: Implement section opening logic
+            });
+        });
+        
+        // Initialize portal
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 AI Portal Enhanced - Ready!');
+        });
+    </script>
+</body>
+</html>

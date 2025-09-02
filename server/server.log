@@ -1,0 +1,82 @@
+⚠️  WebSocket module not found. WebSocket features will be disabled.
+   To enable WebSocket features, run: npm install ws
+🚀 Initializing Unified Server...
+📋 Configuration:
+   ✅ Main website server: Port 4000
+   ❌ AI Assistant with WebSocket support: Port 8000
+   ❌ WebSocket server for real-time updates: Port 8001
+   ❌ Simple HTTP server (Python alternative): Port 8080
+   ❌ undefined: Port undefined
+   ❌ undefined: Port undefined
+🔧 Checking for conflicting processes...
+✅ Unified Server initialized successfully!
+
+📊 Server Status:
+================
+✅ Main website server:
+   Port: 4000
+   Status: 🔴 Stopped
+
+❌ AI Assistant with WebSocket support:
+   Port: 8000
+   Status: 🔴 Stopped
+
+❌ WebSocket server for real-time updates:
+   Port: 8001
+   Status: 🔴 Stopped
+
+❌ Simple HTTP server (Python alternative):
+   Port: 8080
+   Status: 🔴 Stopped
+
+❌ undefined:
+   Port: undefined
+   Status: 🔴 Stopped
+
+❌ undefined:
+   Port: undefined
+   Status: 🔴 Stopped
+
+🌐 Total Requests: 0
+🔌 Active Connections: 0
+❌ Total Errors: 0
+🌐 Website server running at http://localhost:4000/
+📁 Serving files from: /Users/ayush/AI_Projects/Website - main website project
+📄 Main file: /Users/ayush/AI_Projects/Website - main website project/index.html
+
+📊 Server Status:
+================
+✅ Main website server:
+   Port: 4000
+   Status: 🟢 Running
+   Uptime: 30s
+   Requests: 1
+   Errors: 0
+
+❌ AI Assistant with WebSocket support:
+   Port: 8000
+   Status: 🔴 Stopped
+
+❌ WebSocket server for real-time updates:
+   Port: 8001
+   Status: 🔴 Stopped
+
+❌ Simple HTTP server (Python alternative):
+   Port: 8080
+   Status: 🔴 Stopped
+
+❌ undefined:
+   Port: undefined
+   Status: 🔴 Stopped
+
+❌ undefined:
+   Port: undefined
+   Status: 🔴 Stopped
+
+🌐 Total Requests: 1
+🔌 Active Connections: 0
+❌ Total Errors: 0
+
+🛑 Received SIGTERM. Shutting down gracefully...
+🔒 Closing website server...
+✅ All servers and connections closed.
