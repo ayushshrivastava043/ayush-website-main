@@ -8,8 +8,8 @@ const path = require('path');
 
 class CharacterDeployer {
     constructor() {
-        this.configGenerator = require('./character-generator-config.js');
-        this.generator = new this.configGenerator.CharacterGeneratorConfig();
+        const CharacterGeneratorConfig = require('./character-generator-config.js').CharacterGeneratorConfig;
+        this.generator = new CharacterGeneratorConfig();
     }
 
     async deploy(characterType, avatarUrl, customName = null) {
@@ -21,13 +21,13 @@ class CharacterDeployer {
             this.validateInputs(characterType, avatarUrl);
             
             // Generate deployment package
-            const package = this.generator.generateDeploymentPackage(characterType, avatarUrl, customName);
+            const deploymentPackage = this.generator.generateDeploymentPackage(characterType, avatarUrl, customName);
             
             // Create deployment files
-            await this.createDeploymentFiles(package, characterType, customName);
+            await this.createDeploymentFiles(deploymentPackage, characterType, customName);
             
             // Display results
-            this.displayResults(package, characterType, customName);
+            this.displayResults(deploymentPackage, characterType, customName);
             
         } catch (error) {
             console.error('❌ Deployment failed:', error.message);
@@ -52,7 +52,7 @@ class CharacterDeployer {
         console.log('✅ Input validation passed');
     }
 
-    async createDeploymentFiles(package, characterType, customName) {
+    async createDeploymentFiles(deploymentPackage, characterType, customName) {
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
         const deploymentDir = `deployments/${characterType}-${timestamp}`;
         
@@ -64,13 +64,13 @@ class CharacterDeployer {
         
         // Create deployment files
         const files = {
-            'config.json': JSON.stringify(package.config, null, 2),
-            'embed-code.html': package.embedCode,
-            'installation.md': this.generateInstallationGuide(package),
+            'config.json': JSON.stringify(deploymentPackage.config, null, 2),
+            'embed-code.html': deploymentPackage.embedCode,
+            'installation.md': this.generateInstallationGuide(deploymentPackage),
             'deployment-info.json': JSON.stringify({
                 characterType,
                 customName,
-                avatarUrl: package.config.avatarImage,
+                avatarUrl: deploymentPackage.config.avatarImage,
                 deployedAt: new Date().toISOString(),
                 version: '1.0.0'
             }, null, 2)
@@ -86,32 +86,32 @@ class CharacterDeployer {
         console.log(`📁 Deployment package created in: ${deploymentDir}`);
     }
 
-    generateInstallationGuide(package) {
+    generateInstallationGuide(deploymentPackage) {
         return `# Character Generator Installation Guide
 
 ## Quick Installation
 
-${package.installation.steps.map(step => step).join('\n')}
+${deploymentPackage.installation.steps.map(step => step).join('\n')}
 
 ## Requirements
 
-${package.installation.requirements.map(req => `- ${req}`).join('\n')}
+${deploymentPackage.installation.requirements.map(req => `- ${req}`).join('\n')}
 
 ## Embed Code
 
 Copy and paste this code into your website's <head> section:
 
 \`\`\`html
-${package.embedCode}
+${deploymentPackage.embedCode}
 \`\`\`
 
 ## Customization
 
-- **Avatar Image**: ${package.customization.avatarImage}
-- **Character Name**: ${package.customization.avatarName}
-- **Theme Color**: ${package.customization.avatarColor}
-- **Position**: ${package.customization.position}
-- **Theme**: ${package.customization.theme}
+- **Avatar Image**: ${deploymentPackage.customization.avatarImage}
+- **Character Name**: ${deploymentPackage.customization.avatarName}
+- **Theme Color**: ${deploymentPackage.customization.avatarColor}
+- **Position**: ${deploymentPackage.customization.position}
+- **Theme**: ${deploymentPackage.customization.theme}
 
 ## Support
 
@@ -119,14 +119,14 @@ For support, contact: support@your-domain.com
 `;
     }
 
-    displayResults(package, characterType, customName) {
+    displayResults(deploymentPackage, characterType, customName) {
         console.log('\n🎉 Deployment Successful!');
         console.log('========================');
         console.log(`Character Type: ${characterType}`);
-        console.log(`Avatar URL: ${package.config.avatarImage}`);
-        console.log(`Character Name: ${package.config.avatarName}`);
-        console.log(`Theme Color: ${package.config.avatarColor}`);
-        console.log(`Welcome Message: ${package.config.welcomeMessage}`);
+        console.log(`Avatar URL: ${deploymentPackage.config.avatarImage}`);
+        console.log(`Character Name: ${deploymentPackage.config.avatarName}`);
+        console.log(`Theme Color: ${deploymentPackage.config.avatarColor}`);
+        console.log(`Welcome Message: ${deploymentPackage.config.welcomeMessage}`);
         
         console.log('\n📋 Next Steps:');
         console.log('1. Upload your avatar GIF to your server');

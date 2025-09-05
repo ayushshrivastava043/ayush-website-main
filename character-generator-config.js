@@ -124,7 +124,7 @@ class CharacterGeneratorConfig {
 
 // Export for use
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = CharacterGeneratorConfig;
+    module.exports = { CharacterGeneratorConfig };
 } else {
     window.CharacterGeneratorConfig = CharacterGeneratorConfig;
 }

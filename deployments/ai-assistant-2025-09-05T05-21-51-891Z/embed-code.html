@@ -1,0 +1,35 @@
+<!-- Character Generator Widget -->
+<link rel="preload" href="assets/20250821-1758-Relaxed-Chatbot--unscreen-ezgif.com-apng-to-gif-converter.gif" as="image" type="image/gif">
+<script>
+    // Preload the avatar immediately
+    const preloadAvatar = new Image();
+    preloadAvatar.src = 'assets/20250821-1758-Relaxed-Chatbot--unscreen-ezgif.com-apng-to-gif-converter.gif';
+    preloadAvatar.onload = () => console.log('🚀 [PRELOAD] Avatar loaded successfully');
+    preloadAvatar.onerror = () => console.error('❌ [PRELOAD] Avatar failed to load');
+</script>
+<script src="https://your-domain.com/character-generator-widget.js?v=45"></script>
+<script>
+    // Initialize Character Generator
+    document.addEventListener('DOMContentLoaded', () => {
+        new ChatbotWidget({
+  "avatarType": "assistant",
+  "avatarName": "Test Character",
+  "avatarImage": "assets/20250821-1758-Relaxed-Chatbot--unscreen-ezgif.com-apng-to-gif-converter.gif",
+  "avatarColor": "#00ffee",
+  "position": "bottom-right",
+  "offsetX": 20,
+  "offsetY": 20,
+  "theme": "dark",
+  "welcomeMessage": "Hello! I'm your AI Assistant. How can I help you today? 🚀",
+  "placeholderText": "Ask me anything...",
+  "autoOpen": false,
+  "typingSpeed": 50,
+  "bubbleTimeout": 5000,
+  "apiEndpoint": null,
+  "onMessage": null,
+  "onOpen": null,
+  "onClose": null
+});
+    });
+</script>
+<!-- End Character Generator Widget -->

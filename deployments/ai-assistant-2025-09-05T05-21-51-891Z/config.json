@@ -1,0 +1,19 @@
+{
+  "avatarType": "assistant",
+  "avatarName": "Test Character",
+  "avatarImage": "assets/20250821-1758-Relaxed-Chatbot--unscreen-ezgif.com-apng-to-gif-converter.gif",
+  "avatarColor": "#00ffee",
+  "position": "bottom-right",
+  "offsetX": 20,
+  "offsetY": 20,
+  "theme": "dark",
+  "welcomeMessage": "Hello! I'm your AI Assistant. How can I help you today? 🚀",
+  "placeholderText": "Ask me anything...",
+  "autoOpen": false,
+  "typingSpeed": 50,
+  "bubbleTimeout": 5000,
+  "apiEndpoint": null,
+  "onMessage": null,
+  "onOpen": null,
+  "onClose": null
+}
