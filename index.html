@@ -846,23 +846,45 @@
                 <button class="server-control-btn start-btn" onclick="toggleServer(8000, 'aiAssistant')" style="width:100%;padding:12px;background:linear-gradient(45deg, #00ff88, #00ffff);color:#000;border:none;border-radius:8px;font-weight:bold;cursor:pointer;transition:all 0.3s ease;">🚀 Start Server</button>
             </div>
 
-            <!-- Chatbot API Server (Port 5051) -->
-            <div class="server-card" data-port="5051" data-service="chatbot" style="background:rgba(0,0,0,0.8);border-radius:15px;padding:25px;border:2px solid #4ecdc4;transition:all 0.3s ease;cursor:pointer;">
+            <!-- Enhanced Agentic Chatbot Server (Port 5001) -->
+            <div class="server-card" data-port="5001" data-service="enhanced-chatbot" style="background:rgba(0,0,0,0.8);border-radius:15px;padding:25px;border:2px solid #00ffee;transition:all 0.3s ease;cursor:pointer;">
                 <div class="server-header" style="display:flex;align-items:center;gap:15px;margin-bottom:20px;">
-                    <div class="server-icon" style="font-size:32px;">💬</div>
+                    <div class="server-icon" style="font-size:32px;">🤖</div>
                     <div class="server-info">
-                        <h3 style="margin:0;color:#4ecdc4;font-size:20px;">Chatbot API Server</h3>
-                        <p style="margin:5px 0 0 0;color:#ccc;font-size:14px;">Port: 5051</p>
+                        <h3 style="margin:0;color:#00ffee;font-size:20px;">Enhanced Agentic Chatbot</h3>
+                        <p style="margin:5px 0 0 0;color:#ccc;font-size:14px;">Port: 5001 | LangGraph</p>
                     </div>
                 </div>
                 <div class="server-description" style="text-align:left;margin-bottom:20px;color:#e0e0e0;font-size:14px;line-height:1.5;">
-                    <strong>What it does:</strong> Provides chatbot functionality with Flask backend, handles user interactions and AI responses.
+                    <strong>What it does:</strong> Advanced AI assistant with LangGraph workflows, stateful conversations, multi-agent system, and persistent memory. Features workflow visualization, confidence scoring, and intelligent suggestions.
+                </div>
+                <div class="server-features" style="margin-bottom:15px;color:#00ffee;font-size:12px;">
+                    <strong>Features:</strong> 🔄 Workflows | 📊 Stateful | 🤝 Multi-Agent | 💾 Memory | 🎯 Confidence
                 </div>
                 <div class="server-status" style="margin-bottom:20px;">
                     <span class="status-indicator" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#ff4444;margin-right:8px;"></span>
                     <span class="status-text" style="color:#ff4444;font-size:14px;">Stopped</span>
                 </div>
-                <button class="server-control-btn start-btn" onclick="toggleServer(5051, 'chatbot')" style="width:100%;padding:12px;background:linear-gradient(45deg, #00ff88, #00ffff);color:#000;border:none;border-radius:8px;font-weight:bold;cursor:pointer;transition:all 0.3s ease;">🚀 Start Server</button>
+                <button class="server-control-btn start-btn" onclick="toggleServer(5001, 'enhanced-chatbot')" style="width:100%;padding:12px;background:linear-gradient(45deg, #00ffee, #00ccbb);color:#000;border:none;border-radius:8px;font-weight:bold;cursor:pointer;transition:all 0.3s ease;">🚀 Start Enhanced Server</button>
+            </div>
+
+            <!-- Fallback Chatbot API Server (Port 5003) -->
+            <div class="server-card" data-port="5003" data-service="fallback-chatbot" style="background:rgba(0,0,0,0.8);border-radius:15px;padding:25px;border:2px solid #4ecdc4;transition:all 0.3s ease;cursor:pointer;">
+                <div class="server-header" style="display:flex;align-items:center;gap:15px;margin-bottom:20px;">
+                    <div class="server-icon" style="font-size:32px;">💬</div>
+                    <div class="server-info">
+                        <h3 style="margin:0;color:#4ecdc4;font-size:20px;">Fallback Chatbot API</h3>
+                        <p style="margin:5px 0 0 0;color:#ccc;font-size:14px;">Port: 5003</p>
+                    </div>
+                </div>
+                <div class="server-description" style="text-align:left;margin-bottom:20px;color:#e0e0e0;font-size:14px;line-height:1.5;">
+                    <strong>What it does:</strong> Basic chatbot functionality with Flask backend, serves as fallback when enhanced chatbot is unavailable.
+                </div>
+                <div class="server-status" style="margin-bottom:20px;">
+                    <span class="status-indicator" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#ff4444;margin-right:8px;"></span>
+                    <span class="status-text" style="color:#ff4444;font-size:14px;">Stopped</span>
+                </div>
+                <button class="server-control-btn start-btn" onclick="toggleServer(5003, 'fallback-chatbot')" style="width:100%;padding:12px;background:linear-gradient(45deg, #00ff88, #00ffff);color:#000;border:none;border-radius:8px;font-weight:bold;cursor:pointer;transition:all 0.3s ease;">🚀 Start Fallback Server</button>
             </div>
 
             <!-- Monitoring Dashboard (Port 5002) -->
@@ -2580,71 +2602,111 @@
                      });
              }
          </script>
-        <script src="assets/js/chatbot-widget.js?v=45" onload="console.log('✅ Chatbot script loaded successfully!')" onerror="console.error('❌ Failed to load chatbot script!')"></script>
+            <!-- Enhanced Agentic Chatbot with PROPER 3D Avatar System -->
+            <script src="assets/js/enhanced-chatbot-widget-proper.js?v=49" onload="console.log('✅ Enhanced Agentic Chatbot with Proper 3D Avatar System loaded successfully!')" onerror="console.error('❌ Failed to load enhanced chatbot script!')"></script>
         <script>
-            console.log('🔍 Debug: After script tag, checking ChatbotWidget availability...');
-            console.log('🔍 Debug: typeof ChatbotWidget =', typeof ChatbotWidget);
-            console.log('🔍 Debug: window.ChatbotWidget =', window.ChatbotWidget);
+            console.log('🔍 Debug: After script tag, checking EnhancedAgenticChatbotWidget availability...');
+            console.log('🔍 Debug: typeof EnhancedAgenticChatbotWidget =', typeof EnhancedAgenticChatbotWidget);
+            console.log('🔍 Debug: window.EnhancedAgenticChatbotWidget =', window.EnhancedAgenticChatbotWidget);
             
             // Wait for DOM to be fully loaded and chatbot script to be available
-            function initializeChatbot() {
-                console.log('🔍 Debug: initializeChatbot called, ChatbotWidget =', typeof ChatbotWidget);
+            function initializeEnhancedChatbot() {
+                console.log('🔍 Debug: initializeEnhancedChatbot called, EnhancedAgenticChatbotWidget =', typeof EnhancedAgenticChatbotWidget);
                 
-                if (typeof ChatbotWidget !== 'undefined') {
-                    console.log('🚀 Initializing Ayush\'s AI Assistant...');
+                if (typeof EnhancedAgenticChatbotWidget !== 'undefined') {
+                    console.log('🚀 Initializing Enhanced Agentic AI Assistant with Proper 3D Avatar System...');
                     
-                    // Initialize the chatbot with custom configuration
-                    new ChatbotWidget({
+                    // Initialize the enhanced chatbot with PROPER 3D AVATAR SYSTEM
+                    window.enhancedChatbotWidget = new EnhancedAgenticChatbotWidget({
                         avatarType: 'assistant',
-                        avatarName: 'Ayush\'s AI Assistant',
-                                                 avatarImage: 'assets/20250821-1758-Relaxed-Chatbot--unscreen-ezgif.com-apng-to-gif-converter.gif',
+                        avatarName: 'Enhanced AI Assistant',
+                        avatarImage: 'assets/relaxed-chatbot-final.gif', // RESTORED ORIGINAL AVATAR
                         avatarColor: '#00ffee',
                         position: 'bottom-right',
                         offsetX: 120,
                         offsetY: 20,
                         theme: 'dark',
-                        welcomeMessage: 'Hello! I\'m Ayush\'s AI Assistant. How can I help you today? 🚀',
-                        placeholderText: 'Ask me anything...',
-                        autoOpen: false,
-                        typingSpeed: 50,
-                        bubbleTimeout: 10000,
                         
-                        // Custom message handler
-                        onMessage: function(message, chatbot) {
-                            // You can integrate with your AI backend here
-                            console.log('User message:', message);
-                            
-                            // For now, using the built-in response system
-                            // Later you can connect to OpenAI, Claude, or your custom AI service
+                        // Enhanced LangGraph Features
+                        enableLangGraph: true,
+                        showWorkflowSteps: true,
+                        showConfidenceScore: true,
+                        showSuggestedActions: true,
+                        enableStatePersistence: true,
+                        enableMultiAgent: true,
+                        enableFeedbackLoops: true,
+                        
+                        // API Configuration
+                        enhancedEndpoint: 'http://localhost:5001/chat',
+                        fallbackEndpoint: 'http://localhost:5003/chat/send',
+                        
+                        // UI Configuration
+                        widgetSize: { width: 400, height: 600 },
+                        enableAnimations: true,
+                        enableTypingIndicator: true,
+                        enableSound: false,
+                        
+                        // Performance
+                        maxMessages: 50,
+                        messageTimeout: 30000,
+                        workflowTimeout: 30000,
+                        retryAttempts: 3,
+                        
+                        // Custom styling
+                        customCSS: `
+                            .enhanced-agentic-chatbot-widget {
+                                border: 2px solid #00ffee;
+                                box-shadow: 0 0 20px rgba(0, 255, 238, 0.3);
+                            }
+                            .chatbot-header {
+                                background: linear-gradient(135deg, #00ffee, #00ccbb);
+                            }
+                            .enhanced-agentic-chatbot-toggle {
+                                background: linear-gradient(135deg, #00ffee, #00ccbb);
+                                box-shadow: 0 0 15px rgba(0, 255, 238, 0.4);
+                            }
+                            .workflow-indicator {
+                                background: rgba(0, 255, 238, 0.1);
+                                border-left: 3px solid #00ffee;
+                            }
+                            .confidence-indicator {
+                                background: rgba(0, 255, 238, 0.1);
+                                color: #00ffee;
+                            }
+                        `,
+                        
+                        // Event handlers
+                        onMessageSent: function(message) {
+                            console.log('📤 Enhanced message sent:', message);
                         },
-                        
-                        onOpen: function() {
-                            console.log('🚀 Chatbot opened!');
+                        onMessageReceived: function(response) {
+                            console.log('📥 Enhanced response received:', response);
+                            if (response.langgraphFeatures) {
+                                console.log('🔄 LangGraph features:', response.langgraphFeatures);
+                            }
                         },
-                        
-                        // Test function to check if click is working
-                        testClick: function() {
-                            console.log('🚀 TEST CLICK: This should appear when avatar is clicked');
-                            alert('Click detected! Chatbot should open now.');
+                        onWorkflowStep: function(step, intent) {
+                            console.log(`🔄 Workflow Step ${step}: ${intent}`);
                         },
-                        
-                        onClose: function() {
-                            console.log('🚀 Chatbot closed!');
+                        onError: function(error) {
+                            console.error('❌ Enhanced chatbot error:', error);
                         }
                     });
                     
-                    console.log('✅ Ayush\'s AI Assistant initialized successfully!');
+                    console.log('✅ Enhanced Agentic AI Assistant initialized successfully!');
+                    console.log('🚀 LangGraph workflows enabled:', window.enhancedChatbotWidget.config.enableLangGraph);
+                    console.log('📊 Stateful conversations enabled:', window.enhancedChatbotWidget.config.enableStatePersistence);
                 } else {
-                    console.log('⏳ Waiting for ChatbotWidget to load...');
-                    setTimeout(initializeChatbot, 100);
+                    console.log('⏳ Waiting for EnhancedChatbotWidget to load...');
+                    setTimeout(initializeEnhancedChatbot, 100);
                 }
             }
             
             // Start initialization when DOM is ready
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initializeChatbot);
+                document.addEventListener('DOMContentLoaded', initializeEnhancedChatbot);
             } else {
-                initializeChatbot();
+                initializeEnhancedChatbot();
             }
         </script>
 
