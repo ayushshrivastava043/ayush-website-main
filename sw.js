@@ -1,9 +1,10 @@
 // Service Worker for caching chatbot assets
-const CACHE_NAME = 'chatbot-cache-v2';
+const CACHE_NAME = 'chatbot-cache-v3';
 const urlsToCache = [
   'assets/20250821-1758-Relaxed-Chatbot--unscreen-ezgif.com-apng-to-gif-converter.gif',
   'assets/js/chatbot-widget.js',
   'assets/js/enhanced-chatbot-widget-proper.js',
+  'assets/js/enhanced-chatbot-widget-minified.js',
   'assets/css/style.css'
 ];
 

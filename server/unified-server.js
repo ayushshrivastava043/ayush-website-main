@@ -5,6 +5,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const net = require('net');
+const zlib = require('zlib');
 const { EventEmitter } = require('events');
 
 // Check if WebSocket is available
@@ -466,7 +467,17 @@ class UnifiedServer extends EventEmitter {
         res.setHeader('Content-Type', contentType);
         res.setHeader('Content-Length', stats.size);
         res.setHeader('Last-Modified', stats.mtime.toUTCString());
-        res.setHeader('Cache-Control', 'public, max-age=3600');
+        
+        // Check if client accepts gzip compression
+        const acceptsGzip = req.headers['accept-encoding'] && req.headers['accept-encoding'].includes('gzip');
+        // Set appropriate cache control based on file type
+        if (ext === '.js' || ext === '.css') {
+            res.setHeader('Cache-Control', 'public, max-age=300'); // 5 minutes for JS/CSS
+        } else if (ext === '.html') {
+            res.setHeader('Cache-Control', 'no-cache'); // No cache for HTML
+        } else {
+            res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour for other files
+        }
 
         // Handle range requests for large files
         const range = req.headers.range;
@@ -475,9 +486,16 @@ class UnifiedServer extends EventEmitter {
             return;
         }
 
-        // Stream the file
+        // Stream the file with compression if supported
         const stream = fs.createReadStream(filePath);
-        stream.pipe(res);
+        
+        if (acceptsGzip && (contentType.includes('text/') || contentType.includes('application/javascript') || contentType.includes('application/json'))) {
+            res.setHeader('Content-Encoding', 'gzip');
+            const gzip = zlib.createGzip();
+            stream.pipe(gzip).pipe(res);
+        } else {
+            stream.pipe(res);
+        }
 
         stream.on('error', (err) => {
             console.error('Error streaming file:', err);
