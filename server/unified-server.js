@@ -463,13 +463,14 @@ class UnifiedServer extends EventEmitter {
 
         const contentType = mimeTypes[ext] || 'application/octet-stream';
         
-        // Set headers
-        res.setHeader('Content-Type', contentType);
-        res.setHeader('Content-Length', stats.size);
-        res.setHeader('Last-Modified', stats.mtime.toUTCString());
-        
         // Check if client accepts gzip compression
         const acceptsGzip = req.headers['accept-encoding'] && req.headers['accept-encoding'].includes('gzip');
+        
+        // Set headers
+        res.setHeader('Content-Type', contentType);
+        res.setHeader('Last-Modified', stats.mtime.toUTCString());
+        
+        // Don't set Content-Length for compressed content as it will be different
         // Set appropriate cache control based on file type
         if (ext === '.js' || ext === '.css') {
             res.setHeader('Cache-Control', 'public, max-age=300'); // 5 minutes for JS/CSS
@@ -486,16 +487,10 @@ class UnifiedServer extends EventEmitter {
             return;
         }
 
-        // Stream the file with compression if supported
+        // Stream the file (compression disabled for now to fix performance)
         const stream = fs.createReadStream(filePath);
-        
-        if (acceptsGzip && (contentType.includes('text/') || contentType.includes('application/javascript') || contentType.includes('application/json'))) {
-            res.setHeader('Content-Encoding', 'gzip');
-            const gzip = zlib.createGzip();
-            stream.pipe(gzip).pipe(res);
-        } else {
-            stream.pipe(res);
-        }
+        res.setHeader('Content-Length', stats.size);
+        stream.pipe(res);
 
         stream.on('error', (err) => {
             console.error('Error streaming file:', err);
