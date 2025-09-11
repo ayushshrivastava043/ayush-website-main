@@ -1420,10 +1420,8 @@
       function moonMouseEnterHandler() {
         console.log('🟢 MOUSE ENTERED MOON:', this.getAttribute('data-project'));
         
-        // Provide visual feedback without changing transform (preserves positioning)
-        this.style.boxShadow = '0 0 25px rgba(0,255,238,0.8)';
-        this.style.background = 'rgba(0,255,238,0.4)';
-        this.style.border = '2px solid rgba(0,255,238,0.8)';
+        // Do not modify transform; it encodes radial translate from config
+        this.style.boxShadow = '0 0 20px rgba(0,255,238,0.6)';
         
         // Show tooltip
         const tooltip = this.getAttribute('data-tooltip');
@@ -1439,10 +1437,8 @@
       function moonMouseLeaveHandler() {
         console.log('🔴 MOUSE LEFT MOON:', this.getAttribute('data-project'));
         
-        // Reset visual effects while preserving transform (positioning)
+        // Keep transform untouched to preserve position
         this.style.boxShadow = '';
-        this.style.background = '';
-        this.style.border = '';
         
         // Hide tooltip
         hideTooltip();
@@ -1951,11 +1947,11 @@
                     transform: translateY(0) !important;
                 }
                 
-                /* Moon hover effects - removed conflicting transform */
-                .moon {
-                    transition: box-shadow 0.3s ease, background 0.3s ease, border 0.3s ease !important;
-                    cursor: pointer !important;
-                }
+                 /* Moon hover effects - handled by JavaScript to preserve positioning */
+                 .moon {
+                     transition: box-shadow 0.3s ease, background 0.3s ease, border 0.3s ease !important;
+                     cursor: pointer !important;
+                 }
                 
                                  /* Simple profile image styling */
                  .profile-image-container {
@@ -1979,7 +1975,7 @@
                     box-shadow: 0 0 10px var(--moon-glow, rgba(0,255,238,0.3)) !important;
                 }
                 
-                /* Moon hover effects handled by JavaScript to preserve positioning */
+                 /* Moon hover effects handled by JavaScript to preserve positioning */
                 
 
                 
@@ -2558,12 +2554,7 @@
              }
          </script>
             <!-- Enhanced Agentic Chatbot with PROPER 3D Avatar System -->
-        <script>
-                console.log('🔍 Debug: About to load chatbot script...');
-                console.log('🔍 Debug: Current URL:', window.location.href);
-                console.log('🔍 Debug: Script will be loaded from:', 'assets/js/enhanced-chatbot-widget-minified.js?v=80&t=1736592000');
-            </script>
-            <script src="assets/js/enhanced-chatbot-widget-minified.js?v=80&t=1736592000" onload="console.log('✅ Enhanced Agentic Chatbot with PROPER 3D Avatar System loaded successfully!')" onerror="console.error('❌ Failed to load enhanced chatbot script! Check browser console for details.')"></script>
+            <script src="assets/js/enhanced-chatbot-widget-proper.js?v=77" onload="console.log('✅ Enhanced Agentic Chatbot with Reverted Simple Bubble Display loaded successfully!')" onerror="console.error('❌ Failed to load enhanced chatbot script!')"></script>
         <script>
             console.log('🔍 Debug: After script tag, checking EnhancedAgenticChatbotWidget availability...');
             console.log('🔍 Debug: typeof EnhancedAgenticChatbotWidget =', typeof EnhancedAgenticChatbotWidget);
@@ -2669,9 +2660,6 @@
                 initializeEnhancedChatbot();
             }
         </script>
-
-        <!-- Enhanced Agentic Chatbot Container -->
-        <div id="chatbot-widget"></div>
 
   </body>
 </html> 
