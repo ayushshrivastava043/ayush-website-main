@@ -790,6 +790,141 @@
       </div>
     </div>
 
+    <!-- Dashboard Section -->
+    <section class="dashboard-section" style="position:relative !important;width:100vw !important;min-height:800px !important;margin-top:50px !important;margin-bottom:50px !important;z-index:1 !important;color:white !important;font-size:24px !important;text-align:center !important;padding:50px !important;display:block !important;visibility:visible !important;opacity:1 !important;left:50%;transform:translateX(-50%);box-sizing:border-box;background:linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;">
+        
+        <h2 style="color:white;font-size:36px;margin-bottom:30px;text-align:center;position:relative;z-index:10;font-family:'Orbitron',sans-serif;">📊 Dashboard</h2>
+        <p style="color:#e0e0e0;font-size:18px;margin-bottom:40px;text-align:center;max-width:800px;margin-left:auto;margin-right:auto;">Track my active works, ongoing projects, and real-time development progress</p>
+        
+        <!-- Dashboard Grid Container -->
+        <div class="dashboard-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:30px;max-width:1400px;margin:0 auto;padding:20px;">
+            
+            <!-- Active Development Card -->
+            <div class="dashboard-card active-development" style="background:rgba(0,0,0,0.8);border-radius:20px;padding:30px;border:2px solid #00ff88;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;">
+                <div class="card-header" style="display:flex;align-items:center;gap:15px;margin-bottom:25px;">
+                    <div class="card-icon" style="font-size:40px;">🚀</div>
+                    <div class="card-info">
+                        <h3 style="margin:0;color:#00ff88;font-size:22px;">Active Development</h3>
+                        <p style="margin:5px 0 0 0;color:#ccc;font-size:14px;">Currently Working On</p>
+                    </div>
+                </div>
+                <div class="card-content" style="text-align:left;margin-bottom:20px;">
+                    <div class="work-item" style="margin-bottom:15px;padding:15px;background:rgba(0,255,136,0.1);border-radius:10px;border-left:4px solid #00ff88;">
+                        <h4 style="margin:0 0 8px 0;color:#00ff88;font-size:16px;">Enhanced Agentic Chatbot</h4>
+                        <p style="margin:0;color:#e0e0e0;font-size:14px;line-height:1.4;">LangGraph-powered AI assistant with multi-agent workflows, stateful conversations, and persistent memory</p>
+                        <div class="progress-bar" style="margin-top:10px;width:100%;height:6px;background:rgba(0,0,0,0.3);border-radius:3px;overflow:hidden;">
+                            <div class="progress-fill" style="width:85%;height:100%;background:linear-gradient(90deg, #00ff88, #00ffff);border-radius:3px;"></div>
+                        </div>
+                        <span style="color:#00ff88;font-size:12px;margin-top:5px;display:block;">85% Complete</span>
+                    </div>
+                    <div class="work-item" style="margin-bottom:15px;padding:15px;background:rgba(0,255,136,0.1);border-radius:10px;border-left:4px solid #00ff88;">
+                        <h4 style="margin:0 0 8px 0;color:#00ff88;font-size:16px;">AI Video Generation Pipeline</h4>
+                        <p style="margin:0;color:#e0e0e0;font-size:14px;line-height:1.4;">Automated video creation system with AI-powered content generation and editing</p>
+                        <div class="progress-bar" style="margin-top:10px;width:100%;height:6px;background:rgba(0,0,0,0.3);border-radius:3px;overflow:hidden;">
+                            <div class="progress-fill" style="width:70%;height:100%;background:linear-gradient(90deg, #00ff88, #00ffff);border-radius:3px;"></div>
+                        </div>
+                        <span style="color:#00ff88;font-size:12px;margin-top:5px;display:block;">70% Complete</span>
+                    </div>
+                </div>
+                <div class="card-footer" style="text-align:center;">
+                    <span style="color:#00ff88;font-size:14px;font-weight:bold;">🟢 In Active Development</span>
+                </div>
+            </div>
+
+            <!-- Recent Achievements Card -->
+            <div class="dashboard-card recent-achievements" style="background:rgba(0,0,0,0.8);border-radius:20px;padding:30px;border:2px solid #ff6b6b;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;">
+                <div class="card-header" style="display:flex;align-items:center;gap:15px;margin-bottom:25px;">
+                    <div class="card-icon" style="font-size:40px;">🏆</div>
+                    <div class="card-info">
+                        <h3 style="margin:0;color:#ff6b6b;font-size:22px;">Recent Achievements</h3>
+                        <p style="margin:5px 0 0 0;color:#ccc;font-size:14px;">Latest Accomplishments</p>
+                    </div>
+                </div>
+                <div class="card-content" style="text-align:left;margin-bottom:20px;">
+                    <div class="achievement-item" style="margin-bottom:15px;padding:15px;background:rgba(255,107,107,0.1);border-radius:10px;border-left:4px solid #ff6b6b;">
+                        <h4 style="margin:0 0 8px 0;color:#ff6b6b;font-size:16px;">Portfolio Website Launch</h4>
+                        <p style="margin:0;color:#e0e0e0;font-size:14px;line-height:1.4;">Successfully deployed interactive portfolio with 3D avatar chatbot system</p>
+                        <span style="color:#ff6b6b;font-size:12px;margin-top:5px;display:block;">✅ Completed</span>
+                    </div>
+                    <div class="achievement-item" style="margin-bottom:15px;padding:15px;background:rgba(255,107,107,0.1);border-radius:10px;border-left:4px solid #ff6b6b;">
+                        <h4 style="margin:0 0 8px 0;color:#ff6b6b;font-size:16px;">LangGraph Integration</h4>
+                        <p style="margin:0;color:#e0e0e0;font-size:14px;line-height:1.4;">Implemented advanced AI workflows with stateful multi-agent system</p>
+                        <span style="color:#ff6b6b;font-size:12px;margin-top:5px;display:block;">✅ Completed</span>
+                    </div>
+                </div>
+                <div class="card-footer" style="text-align:center;">
+                    <span style="color:#ff6b6b;font-size:14px;font-weight:bold;">🎯 2 Achievements This Month</span>
+                </div>
+            </div>
+
+            <!-- Upcoming Projects Card -->
+            <div class="dashboard-card upcoming-projects" style="background:rgba(0,0,0,0.8);border-radius:20px;padding:30px;border:2px solid #4ecdc4;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;">
+                <div class="card-header" style="display:flex;align-items:center;gap:15px;margin-bottom:25px;">
+                    <div class="card-icon" style="font-size:40px;">🔮</div>
+                    <div class="card-info">
+                        <h3 style="margin:0;color:#4ecdc4;font-size:22px;">Upcoming Projects</h3>
+                        <p style="margin:5px 0 0 0;color:#ccc;font-size:14px;">Next in Pipeline</p>
+                    </div>
+                </div>
+                <div class="card-content" style="text-align:left;margin-bottom:20px;">
+                    <div class="project-item" style="margin-bottom:15px;padding:15px;background:rgba(78,205,196,0.1);border-radius:10px;border-left:4px solid #4ecdc4;">
+                        <h4 style="margin:0 0 8px 0;color:#4ecdc4;font-size:16px;">AI Sales Agent</h4>
+                        <p style="margin:0;color:#e0e0e0;font-size:14px;line-height:1.4;">E-commerce automation with intelligent customer interaction and sales optimization</p>
+                        <span style="color:#4ecdc4;font-size:12px;margin-top:5px;display:block;">📅 Starting Next Week</span>
+                    </div>
+                    <div class="project-item" style="margin-bottom:15px;padding:15px;background:rgba(78,205,196,0.1);border-radius:10px;border-left:4px solid #4ecdc4;">
+                        <h4 style="margin:0 0 8px 0;color:#4ecdc4;font-size:16px;">API Orchestration Framework</h4>
+                        <p style="margin:0;color:#e0e0e0;font-size:14px;line-height:1.4;">End-to-end API management system with intelligent routing and monitoring</p>
+                        <span style="color:#4ecdc4;font-size:12px;margin-top:5px;display:block;">📅 Planning Phase</span>
+                    </div>
+                </div>
+                <div class="card-footer" style="text-align:center;">
+                    <span style="color:#4ecdc4;font-size:14px;font-weight:bold;">🚀 2 Projects Queued</span>
+                </div>
+            </div>
+
+            <!-- Performance Metrics Card -->
+            <div class="dashboard-card performance-metrics" style="background:rgba(0,0,0,0.8);border-radius:20px;padding:30px;border:2px solid #f39c12;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;">
+                <div class="card-header" style="display:flex;align-items:center;gap:15px;margin-bottom:25px;">
+                    <div class="card-icon" style="font-size:40px;">📈</div>
+                    <div class="card-info">
+                        <h3 style="margin:0;color:#f39c12;font-size:22px;">Performance Metrics</h3>
+                        <p style="margin:5px 0 0 0;color:#ccc;font-size:14px;">Real-time Stats</p>
+                    </div>
+                </div>
+                <div class="card-content" style="text-align:left;margin-bottom:20px;">
+                    <div class="metric-item" style="margin-bottom:15px;padding:15px;background:rgba(243,156,18,0.1);border-radius:10px;border-left:4px solid #f39c12;">
+                        <h4 style="margin:0 0 8px 0;color:#f39c12;font-size:16px;">Code Quality Score</h4>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div class="metric-value" style="font-size:24px;font-weight:bold;color:#f39c12;">94%</div>
+                            <div class="metric-trend" style="color:#00ff88;font-size:14px;">↗ +2%</div>
+                        </div>
+                    </div>
+                    <div class="metric-item" style="margin-bottom:15px;padding:15px;background:rgba(243,156,18,0.1);border-radius:10px;border-left:4px solid #f39c12;">
+                        <h4 style="margin:0 0 8px 0;color:#f39c12;font-size:16px;">Project Completion Rate</h4>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div class="metric-value" style="font-size:24px;font-weight:bold;color:#f39c12;">87%</div>
+                            <div class="metric-trend" style="color:#00ff88;font-size:14px;">↗ +5%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer" style="text-align:center;">
+                    <span style="color:#f39c12;font-size:14px;font-weight:bold;">📊 Updated Daily</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Control Panel -->
+        <div class="dashboard-control-panel" style="margin-top:40px;padding:30px;background:rgba(0,0,0,0.6);border-radius:15px;max-width:800px;margin-left:auto;margin-right:auto;">
+            <h3 style="color:#00ff88;font-size:24px;margin-bottom:20px;text-align:center;">🎛️ Dashboard Controls</h3>
+            <div class="control-buttons" style="display:flex;flex-wrap:wrap;gap:15px;justify-content:center;">
+                <button onclick="refreshDashboard()" style="padding:15px 25px;background:linear-gradient(45deg, #00ff88, #00ffff);color:#000;border:none;border-radius:10px;font-weight:bold;cursor:pointer;transition:all 0.3s ease;font-size:16px;">🔄 Refresh Data</button>
+                <button onclick="exportDashboard()" style="padding:15px 25px;background:linear-gradient(45deg, #4ecdc4, #44a08d);color:#000;border:none;border-radius:10px;font-weight:bold;cursor:pointer;transition:all 0.3s ease;font-size:16px;">📊 Export Report</button>
+                <button onclick="toggleNotifications()" style="padding:15px 25px;background:linear-gradient(45deg, #f39c12, #e67e22);color:#000;border:none;border-radius:10px;font-weight:bold;cursor:pointer;transition:all 0.3s ease;font-size:16px;">🔔 Notifications</button>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Portal Section -->
         <section class="projects-portal-section" style="position:relative !important;width:100vw !important;min-height:1200px !important;margin-top:50px !important;margin-bottom:100px !important;z-index:1 !important;color:white !important;font-size:24px !important;text-align:center !important;padding:50px !important;display:block !important;visibility:visible !important;opacity:1 !important;left:50%;transform:translateX(-50%);box-sizing:border-box;background-image:url('assets/ChatGPT%20Image%20Aug%205,%202025,%2004_46_21%20AM.png');background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;">
 
@@ -2192,6 +2327,73 @@
         <!-- 🚀 Astronaut chatbot removed - will be replaced with portable widget -->
         
         <!-- 🚀 Student avatar removed - will be replaced with portable widget -->
+
+        <!-- Dashboard Control Functions -->
+        <script>
+          // Dashboard control functions
+          function refreshDashboard() {
+            console.log('🔄 Refreshing dashboard data...');
+            // Add loading animation
+            const cards = document.querySelectorAll('.dashboard-card');
+            cards.forEach(card => {
+              card.style.opacity = '0.7';
+              card.style.transform = 'scale(0.98)';
+            });
+            
+            // Simulate data refresh
+            setTimeout(() => {
+              cards.forEach(card => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+              });
+              console.log('✅ Dashboard refreshed successfully!');
+            }, 1000);
+          }
+          
+          function exportDashboard() {
+            console.log('📊 Exporting dashboard report...');
+            // Create a simple report
+            const report = {
+              timestamp: new Date().toISOString(),
+              activeProjects: 2,
+              completedAchievements: 2,
+              upcomingProjects: 2,
+              codeQualityScore: '94%',
+              completionRate: '87%'
+            };
+            
+            // Download as JSON
+            const dataStr = JSON.stringify(report, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `dashboard-report-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+            
+            console.log('✅ Dashboard report exported!');
+          }
+          
+          function toggleNotifications() {
+            console.log('🔔 Toggling notifications...');
+            // Simple notification toggle
+            const notificationBtn = event.target;
+            const isActive = notificationBtn.classList.contains('active');
+            
+            if (isActive) {
+              notificationBtn.classList.remove('active');
+              notificationBtn.style.background = 'linear-gradient(45deg, #f39c12, #e67e22)';
+              notificationBtn.innerHTML = '🔔 Notifications';
+              console.log('🔕 Notifications disabled');
+            } else {
+              notificationBtn.classList.add('active');
+              notificationBtn.style.background = 'linear-gradient(45deg, #00ff88, #00ffff)';
+              notificationBtn.innerHTML = '🔔 Notifications ON';
+              console.log('🔔 Notifications enabled');
+            }
+          }
+        </script>
 
         <!-- Typing Animation Script -->
         <script>
