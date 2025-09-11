@@ -385,25 +385,27 @@ class UnifiedServer extends EventEmitter {
 
         // Get file path - look in parent directory (Website root)
         const currentDir = path.resolve(__dirname, '..');
-        let filePath = path.join(currentDir, url);
+        // Strip query parameters from URL for file path
+        const cleanUrl = url.split('?')[0];
+        let filePath = path.join(currentDir, cleanUrl);
         
         // If file not found in current directory, try other directories
         if (!fs.existsSync(filePath)) {
             // Try assets directory
-            if (url.startsWith('/assets/')) {
-                filePath = path.resolve(__dirname, '..', url.substring(1));
+            if (cleanUrl.startsWith('/assets/')) {
+                filePath = path.resolve(__dirname, '..', cleanUrl.substring(1));
             }
             // Try projects directory
-            else if (url.startsWith('/projects/')) {
-                filePath = path.resolve(__dirname, '..', url.substring(1));
+            else if (cleanUrl.startsWith('/projects/')) {
+                filePath = path.resolve(__dirname, '..', cleanUrl.substring(1));
             }
             // Try tools directory
-            else if (url.startsWith('/tools/')) {
-                filePath = path.resolve(__dirname, '..', url.substring(1));
+            else if (cleanUrl.startsWith('/tools/')) {
+                filePath = path.resolve(__dirname, '..', cleanUrl.substring(1));
             }
             // Try pages directory
-            else if (url.startsWith('/pages/')) {
-                filePath = path.resolve(__dirname, '..', url.substring(1));
+            else if (cleanUrl.startsWith('/pages/')) {
+                filePath = path.resolve(__dirname, '..', cleanUrl.substring(1));
             }
         }
         
