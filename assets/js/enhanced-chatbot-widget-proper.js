@@ -1033,7 +1033,7 @@
             });
             
             // Add typing indicator first
-            bubble.innerHTML = '<div class="bubble-text typing-indicator">🤖 Enhanced AI is thinking...</div>';
+            bubble.innerHTML = '<div class="bubble-text typing-indicator">Enhanced AI is thinking...</div>';
             container.appendChild(bubble);
             console.log('✅ Comic-Style Bubble added with size:', randomSize, 'shape:', randomShape, 'effect:', randomEffect);
             console.log('🔍 Bubble classes:', bubble.className);
@@ -1055,7 +1055,7 @@
                     this.typeEnhancedResponse(bubble, response);
                 } catch (error) {
                     console.error('❌ Error getting enhanced AI response:', error);
-                    this.typeEnhancedResponse(bubble, 'I apologize, but I\'m having trouble processing your request right now. Please try again in a moment. 🤖');
+                    this.typeEnhancedResponse(bubble, 'I apologize, but I\'m having trouble processing your request right now. Please try again in a moment.');
                 }
             }, 1000);
         }
