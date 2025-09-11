@@ -5,7 +5,6 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const net = require('net');
-const zlib = require('zlib');
 const { EventEmitter } = require('events');
 
 // Check if WebSocket is available
@@ -386,27 +385,25 @@ class UnifiedServer extends EventEmitter {
 
         // Get file path - look in parent directory (Website root)
         const currentDir = path.resolve(__dirname, '..');
-        // Strip query parameters from URL for file path
-        const cleanUrl = url.split('?')[0];
-        let filePath = path.join(currentDir, cleanUrl);
+        let filePath = path.join(currentDir, url);
         
         // If file not found in current directory, try other directories
         if (!fs.existsSync(filePath)) {
             // Try assets directory
-            if (cleanUrl.startsWith('/assets/')) {
-                filePath = path.resolve(__dirname, '..', cleanUrl.substring(1));
+            if (url.startsWith('/assets/')) {
+                filePath = path.resolve(__dirname, '..', url.substring(1));
             }
             // Try projects directory
-            else if (cleanUrl.startsWith('/projects/')) {
-                filePath = path.resolve(__dirname, '..', cleanUrl.substring(1));
+            else if (url.startsWith('/projects/')) {
+                filePath = path.resolve(__dirname, '..', url.substring(1));
             }
             // Try tools directory
-            else if (cleanUrl.startsWith('/tools/')) {
-                filePath = path.resolve(__dirname, '..', cleanUrl.substring(1));
+            else if (url.startsWith('/tools/')) {
+                filePath = path.resolve(__dirname, '..', url.substring(1));
             }
             // Try pages directory
-            else if (cleanUrl.startsWith('/pages/')) {
-                filePath = path.resolve(__dirname, '..', cleanUrl.substring(1));
+            else if (url.startsWith('/pages/')) {
+                filePath = path.resolve(__dirname, '..', url.substring(1));
             }
         }
         
@@ -463,22 +460,11 @@ class UnifiedServer extends EventEmitter {
 
         const contentType = mimeTypes[ext] || 'application/octet-stream';
         
-        // Check if client accepts gzip compression
-        const acceptsGzip = req.headers['accept-encoding'] && req.headers['accept-encoding'].includes('gzip');
-        
         // Set headers
         res.setHeader('Content-Type', contentType);
+        res.setHeader('Content-Length', stats.size);
         res.setHeader('Last-Modified', stats.mtime.toUTCString());
-        
-        // Don't set Content-Length for compressed content as it will be different
-        // Set appropriate cache control based on file type
-        if (ext === '.js' || ext === '.css') {
-            res.setHeader('Cache-Control', 'public, max-age=300'); // 5 minutes for JS/CSS
-        } else if (ext === '.html') {
-            res.setHeader('Cache-Control', 'no-cache'); // No cache for HTML
-        } else {
-            res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour for other files
-        }
+        res.setHeader('Cache-Control', 'public, max-age=3600');
 
         // Handle range requests for large files
         const range = req.headers.range;
@@ -487,9 +473,8 @@ class UnifiedServer extends EventEmitter {
             return;
         }
 
-        // Stream the file (compression disabled for now to fix performance)
+        // Stream the file
         const stream = fs.createReadStream(filePath);
-        res.setHeader('Content-Length', stats.size);
         stream.pipe(res);
 
         stream.on('error', (err) => {

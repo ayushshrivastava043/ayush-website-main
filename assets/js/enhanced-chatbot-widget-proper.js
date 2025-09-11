@@ -14,15 +14,14 @@
     
     class EnhancedAgenticChatbotWidget {
         constructor(options = {}) {
-            const startTime = performance.now();
-            console.log('🚀 [PERF] Enhanced Agentic Chatbot Widget constructor started at:', startTime);
+            // Optimized initialization - reduced logging for better performance
             
             // Default configuration - EXACT ORIGINAL SYSTEM
             this.config = {
                 // Avatar Configuration (Original System)
                 avatarType: options.avatarType || 'assistant',
                 avatarName: options.avatarName || 'Enhanced AI Assistant',
-                avatarImage: options.avatarImage || 'assets/relaxed-chatbot-final.gif',
+                avatarImage: options.avatarImage || 'assets/chatbot-avatar-optimized.webp',
                 avatarColor: options.avatarColor || '#00ffee',
                 
                 // Position Configuration (Original System - 70% down from top)
@@ -64,8 +63,7 @@
                 bubbleTimeout: options.bubbleTimeout || 4000
             };
             
-            const configTime = performance.now();
-            console.log('🚀 [PERF] Config setup completed in:', configTime - startTime, 'ms');
+            // Config setup completed - optimized
             
             // Initialize the widget
             this.init();
