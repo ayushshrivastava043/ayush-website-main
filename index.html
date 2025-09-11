@@ -791,16 +791,16 @@
     </div>
 
     <!-- Dashboard Section -->
-    <section class="dashboard-section" style="position:relative !important;width:100vw !important;min-height:800px !important;margin-top:80px !important;margin-bottom:80px !important;z-index:1 !important;color:white !important;font-size:24px !important;text-align:center !important;padding:50px !important;display:block !important;visibility:visible !important;opacity:1 !important;left:50%;transform:translateX(-50%);box-sizing:border-box;background:linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);background-size:cover;background-position:center;background-repeat:no-repeat;">
+    <section class="dashboard-section" style="position:relative !important;width:100vw !important;min-height:1200px !important;margin-top:80px !important;margin-bottom:80px !important;z-index:1 !important;color:white !important;font-size:24px !important;text-align:center !important;padding:80px 50px !important;display:block !important;visibility:visible !important;opacity:1 !important;left:50%;transform:translateX(-50%);box-sizing:border-box;background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;">
         
         <h2 style="color:white;font-size:36px;margin-bottom:30px;text-align:center;position:relative;z-index:10;font-family:'Orbitron',sans-serif;">📊 Dashboard</h2>
         <p style="color:#e0e0e0;font-size:18px;margin-bottom:40px;text-align:center;max-width:800px;margin-left:auto;margin-right:auto;">Track my active works, ongoing projects, and real-time development progress</p>
         
         <!-- Dashboard Grid Container -->
-        <div class="dashboard-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:30px;max-width:1400px;margin:0 auto;padding:20px;">
+        <div class="dashboard-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:40px;max-width:1600px;margin:0 auto;padding:40px;">
             
             <!-- Active Development Card -->
-            <div class="dashboard-card active-development" style="background:rgba(0,0,0,0.8);border-radius:20px;padding:30px;border:2px solid #00ff88;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;">
+            <div class="dashboard-card active-development" style="background:rgba(0,0,0,0.9);border-radius:25px;padding:40px;border:2px solid #00ff88;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;min-height:400px;">
                 <div class="card-header" style="display:flex;align-items:center;gap:15px;margin-bottom:25px;">
                     <div class="card-icon" style="font-size:40px;">🚀</div>
                     <div class="card-info">
@@ -832,7 +832,7 @@
             </div>
 
             <!-- Recent Achievements Card -->
-            <div class="dashboard-card recent-achievements" style="background:rgba(0,0,0,0.8);border-radius:20px;padding:30px;border:2px solid #ff6b6b;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;">
+            <div class="dashboard-card recent-achievements" style="background:rgba(0,0,0,0.9);border-radius:25px;padding:40px;border:2px solid #ff6b6b;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;min-height:400px;">
                 <div class="card-header" style="display:flex;align-items:center;gap:15px;margin-bottom:25px;">
                     <div class="card-icon" style="font-size:40px;">🏆</div>
                     <div class="card-info">
@@ -858,7 +858,7 @@
             </div>
 
             <!-- Upcoming Projects Card -->
-            <div class="dashboard-card upcoming-projects" style="background:rgba(0,0,0,0.8);border-radius:20px;padding:30px;border:2px solid #4ecdc4;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;">
+            <div class="dashboard-card upcoming-projects" style="background:rgba(0,0,0,0.9);border-radius:25px;padding:40px;border:2px solid #4ecdc4;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;min-height:400px;">
                 <div class="card-header" style="display:flex;align-items:center;gap:15px;margin-bottom:25px;">
                     <div class="card-icon" style="font-size:40px;">🔮</div>
                     <div class="card-info">
@@ -884,7 +884,7 @@
             </div>
 
             <!-- Performance Metrics Card -->
-            <div class="dashboard-card performance-metrics" style="background:rgba(0,0,0,0.8);border-radius:20px;padding:30px;border:2px solid #f39c12;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;">
+            <div class="dashboard-card performance-metrics" style="background:rgba(0,0,0,0.9);border-radius:25px;padding:40px;border:2px solid #f39c12;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;min-height:400px;">
                 <div class="card-header" style="display:flex;align-items:center;gap:15px;margin-bottom:25px;">
                     <div class="card-icon" style="font-size:40px;">📈</div>
                     <div class="card-info">
@@ -915,7 +915,7 @@
         </div>
 
         <!-- Dashboard Control Panel -->
-        <div class="dashboard-control-panel" style="margin-top:40px;padding:30px;background:rgba(0,0,0,0.6);border-radius:15px;max-width:800px;margin-left:auto;margin-right:auto;">
+        <div class="dashboard-control-panel" style="margin-top:60px;padding:40px;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);border-radius:20px;max-width:1000px;margin-left:auto;margin-right:auto;border:1px solid rgba(255,255,255,0.1);">
             <h3 style="color:#00ff88;font-size:24px;margin-bottom:20px;text-align:center;">🎛️ Dashboard Controls</h3>
             <div class="control-buttons" style="display:flex;flex-wrap:wrap;gap:15px;justify-content:center;">
                 <button onclick="refreshDashboard()" style="padding:15px 25px;background:linear-gradient(45deg, #00ff88, #00ffff);color:#000;border:none;border-radius:10px;font-weight:bold;cursor:pointer;transition:all 0.3s ease;font-size:16px;">🔄 Refresh Data</button>
