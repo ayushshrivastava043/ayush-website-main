@@ -61,7 +61,7 @@
                 // Advanced Options (Original System)
                 autoOpen: options.autoOpen || false,
                 typingSpeed: options.typingSpeed || 50,
-                bubbleTimeout: options.bubbleTimeout || 10000
+                bubbleTimeout: options.bubbleTimeout || 4000
             };
             
             const configTime = performance.now();
@@ -186,20 +186,21 @@
         }
         
         getPositionStyles() {
-            // Calculate 50% down from top (MOVED 20% UP from original 70%)
+            // Calculate 60% down from top (10% BELOW current 50% position)
             const viewportHeight = window.innerHeight;
-            const fiftyPercentDown = Math.floor(viewportHeight * 0.5);
+            const sixtyPercentDown = Math.floor(viewportHeight * 0.6);
             
             const positions = {
-                'bottom-right': `position:fixed;top:${fiftyPercentDown}px;right:${this.config.offsetX}px;`,
-                'bottom-left': `position:fixed;top:${fiftyPercentDown}px;left:${this.config.offsetX}px;`,
+                'bottom-right': `position:fixed;top:${sixtyPercentDown}px;right:${this.config.offsetX}px;`,
+                'bottom-left': `position:fixed;top:${sixtyPercentDown}px;left:${this.config.offsetX}px;`,
                 'top-right': `position:fixed;top:${this.config.offsetY}px;right:${this.config.offsetX}px;`,
                 'top-left': `position:fixed;top:${this.config.offsetY}px;left:${this.config.offsetX}px;`,
                 'center-right': `position:fixed;top:50%;right:${this.config.offsetX}px;transform:translateY(-50%);`,
                 'center-left': `position:fixed;top:50%;left:${this.config.offsetX}px;transform:translateY(-50%);`
             };
             
-            return positions[this.config.position] || positions['bottom-right'];
+            // Force LEFT side positioning (opposite side)
+            return `position:fixed;top:${sixtyPercentDown}px;left:${this.config.offsetX}px;`;
         }
         
         injectStyles() {
@@ -304,11 +305,12 @@
                 
                 /* LANGGRAPH ENHANCEMENT INDICATOR - REMOVED to avoid covering avatar */
                 
-                /* TYPING BOX - EXACT ORIGINAL SYSTEM */
+                /* TYPING BOX - STATE-OF-THE-ART FIXED POSITIONING */
                 .chatbot-typing-box {
-                    position: absolute;
-                    left: -50%;
-                    transform: translateX(-50%);
+                    position: fixed !important;
+                    left: 20px !important;
+                    bottom: calc(40vh - 264px) !important;
+                    transform: none !important;
                     background: linear-gradient(135deg, #000000, #1a1a1a);
                     border-radius: 20px;
                     padding: 15px 20px;
@@ -317,8 +319,7 @@
                     backdrop-filter: blur(10px);
                     border: 2px solid #333;
                     opacity: 0;
-                    transform: scale(0.8);
-                    transition: all 0.3s ease;
+                    transition: opacity 0.3s ease;
                     display: none;
                     gap: 8px;
                     align-items: center;
@@ -327,7 +328,7 @@
                 
                 .chatbot-typing-box.active {
                     opacity: 1;
-                    transform: scale(1);
+                    transform: none !important;
                 }
                 
                 .chatbot-input {
@@ -406,13 +407,15 @@
                     display: block;
                 }
                 
-                /* CHAT BUBBLES - EXACT ORIGINAL SYSTEM */
+                /* CHAT BUBBLES - ENHANCED WITH DIFFERENT SIZES AND SHAPES */
                 .chatbot-bubble {
-                    position: absolute;
-                    bottom: 200px;
-                    max-width: 300px;
-                    padding: 15px 20px;
-                    border-radius: 20px;
+                    position: fixed;
+                    top: calc(60vh - 80px);
+                    left: 10px;
+                    max-width: 350px;
+                    min-height: 40px;
+                    height: auto;
+                    padding: 18px 24px;
                     background: linear-gradient(135deg, #000000, #1a1a1a);
                     border: 2px solid #333;
                     color: white;
@@ -420,10 +423,263 @@
                     line-height: 1.4;
                     box-shadow: 0 8px 32px rgba(0,0,0,0.5);
                     opacity: 1;
-                    transform: scale(1);
                     transition: all 0.3s ease;
                     word-wrap: break-word;
                     z-index: 999997;
+                    display: block;
+                    overflow: visible;
+                    border-radius: 20px;
+                }
+                
+                /* SIMPLE BUBBLE APPEARANCE ANIMATION */
+                @keyframes bubbleAppear {
+                    0% {
+                        opacity: 0;
+                        transform: scale(0.8);
+                    }
+                    100% {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+                
+                /* FALLBACK STATE - IF ANIMATION DOESN'T WORK */
+                .chatbot-bubble.visible {
+                    transform: scale(1) !important;
+                    opacity: 1 !important;
+                    top: calc(60vh - 80px) !important;
+                }
+                
+                /* BUBBLE TEXT - START FROM BOTTOM */
+                .chatbot-bubble .bubble-text {
+                    display: block;
+                    width: 100%;
+                    min-height: 20px;
+                    text-align: left;
+                    vertical-align: bottom;
+                }
+                
+                .chatbot-bubble .typing-indicator {
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                }
+                
+                /* ADVANCED COMIC-STYLE BUBBLE SIZES AND SHAPES */
+                .chatbot-bubble.size-small {
+                    max-width: 220px !important;
+                    padding: 12px 18px !important;
+                    font-size: 12px !important;
+                    min-height: 50px;
+                    line-height: 1.3;
+                }
+                
+                .chatbot-bubble.size-medium {
+                    max-width: 300px !important;
+                    padding: 16px 22px !important;
+                    font-size: 14px !important;
+                    min-height: 60px;
+                    line-height: 1.4;
+                }
+                
+                .chatbot-bubble.size-large {
+                    max-width: 360px !important;
+                    padding: 20px 26px !important;
+                    font-size: 15px !important;
+                    min-height: 70px;
+                    line-height: 1.4;
+                }
+                
+                .chatbot-bubble.size-extra-large {
+                    max-width: 420px !important;
+                    padding: 24px 30px !important;
+                    font-size: 16px !important;
+                    min-height: 80px;
+                    line-height: 1.5;
+                }
+                
+                /* COMIC-STYLE SHAPES WITH ADVANCED CLIP-PATHS */
+                .chatbot-bubble.shape-rounded {
+                    border-radius: 25px 25px 25px 8px !important;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+                }
+                
+                .chatbot-bubble.shape-pill {
+                    border-radius: 50px !important;
+                    box-shadow: 0 6px 20px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.15) !important;
+                }
+                
+                .chatbot-bubble.shape-square {
+                    border-radius: 12px !important;
+                    box-shadow: 0 3px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+                }
+                
+                .chatbot-bubble.shape-hexagon {
+                    border-radius: 0 !important;
+                    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%) !important;
+                    box-shadow: 0 5px 18px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+                }
+                
+                .chatbot-bubble.shape-speech {
+                    border-radius: 25px 25px 25px 6px !important;
+                    position: relative;
+                    box-shadow: 0 6px 22px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.15) !important;
+                }
+                
+                .chatbot-bubble.shape-speech::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -12px;
+                    left: 25px;
+                    width: 0;
+                    height: 0;
+                    border-left: 12px solid transparent;
+                    border-right: 12px solid transparent;
+                    border-top: 12px solid #1a1a1a;
+                    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+                }
+                
+                /* NEW COMIC-STYLE SHAPES */
+                .chatbot-bubble.shape-cloud {
+                    border-radius: 50px 50px 50px 50px / 60px 60px 60px 60px !important;
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.2) !important;
+                    position: relative;
+                }
+                
+                .chatbot-bubble.shape-cloud::before {
+                    content: '';
+                    position: absolute;
+                    bottom: -8px;
+                    left: 30px;
+                    width: 20px;
+                    height: 20px;
+                    background: #1a1a1a;
+                    border-radius: 50%;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                }
+                
+                .chatbot-bubble.shape-cloud::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -12px;
+                    left: 45px;
+                    width: 15px;
+                    height: 15px;
+                    background: #1a1a1a;
+                    border-radius: 50%;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                }
+                
+                .chatbot-bubble.shape-explosion {
+                    border-radius: 0 !important;
+                    clip-path: polygon(50% 0%, 80% 20%, 100% 50%, 80% 80%, 50% 100%, 20% 80%, 0% 50%, 20% 20%) !important;
+                    box-shadow: 0 7px 20px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.15) !important;
+                }
+                
+                .chatbot-bubble.shape-diamond {
+                    border-radius: 0 !important;
+                    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%) !important;
+                    box-shadow: 0 6px 18px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+                }
+                
+                .chatbot-bubble.shape-heart {
+                    border-radius: 0 !important;
+                    clip-path: polygon(50% 85%, 15% 45%, 15% 15%, 50% 35%, 85% 15%, 85% 45%) !important;
+                    box-shadow: 0 8px 22px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.15) !important;
+                }
+                
+                .chatbot-bubble.shape-star {
+                    border-radius: 0 !important;
+                    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%) !important;
+                    box-shadow: 0 7px 20px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.15) !important;
+                }
+                
+                .chatbot-bubble.shape-burst {
+                    border-radius: 0 !important;
+                    clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 90% 60%, 100% 100%, 50% 90%, 0% 100%, 10% 60%, 0% 35%, 20% 10%) !important;
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.45), inset 0 2px 0 rgba(255,255,255,0.2) !important;
+                }
+                
+                /* CLASSIC SPEECH BUBBLE SHAPE - FROM PROVIDED IMAGE */
+                .chatbot-bubble.shape-classic-speech {
+                    border-radius: 20px 20px 20px 5px !important;
+                    position: relative;
+                    box-shadow: 0 6px 20px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.15) !important;
+                    background: linear-gradient(135deg, #1a1a1a, #2a2a2a, #1a1a1a) !important;
+                    overflow: visible !important;
+                }
+                
+                .chatbot-bubble.shape-classic-speech::after {
+                    content: '';
+                    position: absolute;
+                    top: -18px;
+                    right: 25px;
+                    width: 0;
+                    height: 0;
+                    border-left: 18px solid transparent;
+                    border-right: 18px solid transparent;
+                    border-bottom: 18px solid #1a1a1a;
+                    z-index: 999998;
+                    filter: drop-shadow(0 -4px 8px rgba(0,0,0,0.4));
+                }
+                
+                /* COMIC-STYLE ANIMATIONS */
+                .chatbot-bubble.comic-bounce {
+                    animation: comicBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                }
+                
+                .chatbot-bubble.comic-wiggle {
+                    animation: comicWiggle 0.8s ease-in-out;
+                }
+                
+                .chatbot-bubble.comic-pulse {
+                    animation: comicPulse 1.2s ease-in-out infinite;
+                }
+                
+                @keyframes comicBounce {
+                    0% { transform: scale(0.3) rotate(-5deg); opacity: 0; }
+                    50% { transform: scale(1.1) rotate(2deg); }
+                    70% { transform: scale(0.9) rotate(-1deg); }
+                    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+                }
+                
+                @keyframes comicWiggle {
+                    0%, 100% { transform: rotate(0deg); }
+                    25% { transform: rotate(3deg); }
+                    75% { transform: rotate(-3deg); }
+                }
+                
+                @keyframes comicPulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                }
+                
+                /* COMIC-STYLE GRADIENTS AND EFFECTS */
+                .chatbot-bubble.comic-glow {
+                    box-shadow: 0 0 20px rgba(0, 238, 255, 0.6), 0 6px 25px rgba(0,0,0,0.4) !important;
+                    border: 2px solid rgba(0, 238, 255, 0.8) !important;
+                }
+                
+                .chatbot-bubble.comic-shine {
+                    background: linear-gradient(135deg, #000000, #1a1a1a, #2a2a2a, #1a1a1a, #000000) !important;
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                .chatbot-bubble.comic-shine::before {
+                    content: '';
+                    position: absolute;
+                    top: -50%;
+                    left: -50%;
+                    width: 200%;
+                    height: 200%;
+                    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+                    animation: shine 2s infinite;
+                }
+                
+                @keyframes shine {
+                    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+                    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
                 }
                 
                 .chatbot-bubble.hidden {
@@ -432,16 +688,15 @@
                 }
                 
                 .chatbot-bubble.welcome-bubble {
-                    right: 0px;
+                    left: 0px;
                     border-color: ${this.config.avatarColor};
                     background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(0,0,0,0.8));
                     z-index: 999996;
-                    bottom: 200px;
                     display: none;
                 }
                 
                 .chatbot-bubble.response-bubble {
-                    right: 0px;
+                    left: 0px;
                     margin-bottom: 10px;
                     background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.7));
                 }
@@ -506,12 +761,13 @@
                     }
                     
                     .chatbot-typing-box {
-                        width: 250px;
-                        bottom: -58px;
+                        width: 250px !important;
+                        left: 15px !important;
+                        bottom: calc(40vh - 242px) !important;
                     }
                     
                     .chatbot-bubble {
-                        bottom: 150px;
+                        bottom: calc(40vh + 80px);
                         max-width: 250px;
                     }
                 }
@@ -522,13 +778,14 @@
                     }
                     
                     .chatbot-typing-box {
-                        width: 200px;
-                        bottom: -48px;
+                        width: 200px !important;
+                        left: 10px !important;
+                        bottom: calc(40vh - 220px) !important;
                         padding: 12px 15px;
                     }
                     
                     .chatbot-bubble {
-                        bottom: 120px;
+                        bottom: calc(40vh + 80px);
                         max-width: 200px;
                         font-size: 12px;
                         padding: 12px 15px;
@@ -644,10 +901,12 @@
             window.addEventListener('resize', () => {
                 if (this.elements.container) {
                     const viewportHeight = window.innerHeight;
-                    const fiftyPercentDown = Math.floor(viewportHeight * 0.5);
-                    this.elements.container.style.top = `${fiftyPercentDown}px`;
+                    const sixtyPercentDown = Math.floor(viewportHeight * 0.6);
+                    this.elements.container.style.top = `${sixtyPercentDown}px`;
+                    this.elements.container.style.left = `${this.config.offsetX}px`;
+                    this.elements.container.style.right = 'auto';
                     this.elements.container.style.bottom = 'auto';
-                    console.log('🔄 Repositioned enhanced chatbot to 50% down from top (moved 20% up)');
+                    console.log('🔄 Repositioned enhanced chatbot to 60% down from top (10% below) on LEFT side');
                 }
             });
             
@@ -745,18 +1004,47 @@
             const container = this.elements.bubbleContainer;
             console.log('🔍 Enhanced Bubble container:', container);
             
+            // Advanced comic-style size and shape selection
+            const sizes = ['size-medium'];
+            const shapes = [
+                'shape-speech'
+            ];
+            
+            // Comic-style effects
+            const effects = ['comic-shine'];
+            
+            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+            const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+            
             const bubble = document.createElement('div');
             bubble.className = 'chatbot-bubble response-bubble enhanced-response-bubble';
+            bubble.classList.add(randomSize);
+            bubble.classList.add(randomShape);
+            bubble.classList.add(randomEffect);
             bubble.style.zIndex = '999997';
-            bubble.style.bottom = '200px';
+            // Let CSS handle positioning naturally
+            
+            console.log('🎨 Applied bubble classes:', {
+                size: randomSize,
+                shape: randomShape,
+                effect: randomEffect,
+                allClasses: bubble.className
+            });
             
             // Add typing indicator first
             bubble.innerHTML = '<div class="bubble-text typing-indicator">🤖 Enhanced AI is thinking...</div>';
             container.appendChild(bubble);
-            console.log('✅ Enhanced Bubble added to container');
+            console.log('✅ Comic-Style Bubble added with size:', randomSize, 'shape:', randomShape, 'effect:', randomEffect);
+            console.log('🔍 Bubble classes:', bubble.className);
             
             // Animate in
             setTimeout(() => bubble.classList.add('active'), 50);
+            
+            // Add fallback class to ensure visibility
+            setTimeout(() => {
+                bubble.classList.add('visible');
+            }, 100);
             
             // Get enhanced AI response with LangGraph features
             setTimeout(async () => {
@@ -770,12 +1058,6 @@
                     this.typeEnhancedResponse(bubble, 'I apologize, but I\'m having trouble processing your request right now. Please try again in a moment. 🤖');
                 }
             }, 1000);
-            
-            // Remove after timeout
-            setTimeout(() => {
-                bubble.classList.add('hidden');
-                setTimeout(() => bubble.remove(), 300);
-            }, this.config.bubbleTimeout);
         }
         
         typeEnhancedResponse(bubble, response) {
@@ -783,16 +1065,31 @@
             textElement.innerHTML = '';
             textElement.classList.remove('typing-indicator');
             
-            let charIndex = 0;
-            const typeChar = () => {
-                if (charIndex < response.length) {
-                    textElement.innerHTML += response.charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeChar, this.config.typingSpeed);
+            // Add simple appearance animation
+            bubble.style.animation = 'bubbleAppear 0.3s ease-out forwards';
+            
+            // Split response into words for better typing effect
+            const words = response.split(' ');
+            let wordIndex = 0;
+            
+            const typeWord = () => {
+                if (wordIndex < words.length) {
+                    // Add word with space (except for last word)
+                    const word = words[wordIndex] + (wordIndex < words.length - 1 ? ' ' : '');
+                    textElement.innerHTML += word;
+                    wordIndex++;
+                    setTimeout(typeWord, this.config.typingSpeed * 3); // Slower for words
+                } else {
+                    // Message finished typing - start 4-second countdown
+                    console.log('✅ Message finished typing, starting 4-second countdown');
+                    setTimeout(() => {
+                        bubble.classList.add('hidden');
+                        setTimeout(() => bubble.remove(), 300);
+                    }, this.config.bubbleTimeout);
                 }
             };
             
-            typeChar();
+            typeWord();
         }
         
         async generateEnhancedResponse(message) {
