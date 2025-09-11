@@ -1894,21 +1894,21 @@
                     z-index: 999 !important;
                 }
                 
-                /* Simple moon positioning around planets */
-                .planet.earth .moon:nth-child(1) { top: -100px; left: 50%; transform: translateX(-50%); }
-                .planet.earth .moon:nth-child(2) { top: 50%; left: -100px; transform: translateY(-50%); }
-                .planet.earth .moon:nth-child(3) { top: 50%; right: -100px; transform: translateY(-50%); }
+                /* Equidistant moon positioning around planets */
+                .planet.earth .moon:nth-child(1) { top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(-120px); }
+                .planet.earth .moon:nth-child(2) { top: 50%; left: 50%; transform: translate(-50%, -50%) translateX(-120px); }
+                .planet.earth .moon:nth-child(3) { top: 50%; left: 50%; transform: translate(-50%, -50%) translateX(120px); }
                 
-                .planet.jupiter .moon:nth-child(1) { top: -100px; left: 50%; transform: translateX(-50%); }
-                .planet.jupiter .moon:nth-child(2) { top: 50%; left: -100px; transform: translateY(-50%); }
-                .planet.jupiter .moon:nth-child(3) { top: 50%; right: -100px; transform: translateY(-50%); }
-                .planet.jupiter .moon:nth-child(4) { bottom: -100px; left: 50%; transform: translateX(-50%); }
+                .planet.jupiter .moon:nth-child(1) { top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(-120px); }
+                .planet.jupiter .moon:nth-child(2) { top: 50%; left: 50%; transform: translate(-50%, -50%) translateX(-120px); }
+                .planet.jupiter .moon:nth-child(3) { top: 50%; left: 50%; transform: translate(-50%, -50%) translateX(120px); }
+                .planet.jupiter .moon:nth-child(4) { top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(120px); }
                 
-                .planet.saturn .moon:nth-child(1) { top: -100px; left: 50%; transform: translateX(-50%); }
-                .planet.saturn .moon:nth-child(2) { top: 50%; left: -100px; transform: translateY(-50%); }
-                .planet.saturn .moon:nth-child(3) { top: 50%; right: -100px; transform: translateY(-50%); }
-                .planet.saturn .moon:nth-child(4) { bottom: -100px; left: 50%; transform: translateX(-50%); }
-                .planet.saturn .moon:nth-child(5) { bottom: -100px; right: 50%; transform: translateX(50%); }
+                .planet.saturn .moon:nth-child(1) { top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(-120px); }
+                .planet.saturn .moon:nth-child(2) { top: 50%; left: 50%; transform: translate(-50%, -50%) translateX(-120px); }
+                .planet.saturn .moon:nth-child(3) { top: 50%; left: 50%; transform: translate(-50%, -50%) translateX(120px); }
+                .planet.saturn .moon:nth-child(4) { top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(120px); }
+                .planet.saturn .moon:nth-child(5) { top: 50%; left: 50%; transform: translate(-50%, -50%) translate(85px, 85px); }
                 
                 /* ===== MOON SYSTEM CONTAINERS ===== */
                 .moon-system {
