@@ -34,7 +34,11 @@
             padding: 0;
             font-family: 'Poppins', sans-serif;
             color: var(--text, #fff);
-            background: transparent;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(15,32,39,0.3) 70%, rgba(32,58,67,0.3) 100%);
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center;
             transition: background 0.5s ease;
             height: auto;
             overflow-x: hidden;
@@ -190,7 +194,7 @@
             font-size: 0.8rem;
         }
 
-        /* 🚀 Chatbot styles removed - will be replaced with portable widget styles */
+        /* Chatbot styles removed - will be replaced with portable widget styles */
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
@@ -237,7 +241,7 @@
 
         /* Default theme */
         body {
-            background: transparent;
+            background: linear-gradient(45deg, #000000, #1a1a1a);
             transition: background-image 0.5s ease, background 0.5s ease;
         }
 
@@ -471,7 +475,7 @@
             width: 160px;
         }
         /* IMPORTANT: Do NOT add overflow:hidden to html or body! This breaks scrolling. Only #space should have overflow:hidden. */
-        html,body{margin:0;width:100vw;height:100vh;background:transparent;}
+        html,body{margin:0;width:100vw;height:100vh;background:#000;}
         #space{width:100vw;height:100vh;overflow:hidden;}
 
         /* Professional GIF Alien Character Styles */
@@ -789,7 +793,7 @@
     <!-- Dashboard Section -->
     <section class="dashboard-section" style="position:relative !important;width:100vw !important;min-height:1200px !important;margin-top:120px !important;margin-bottom:120px !important;z-index:1 !important;color:white !important;font-size:24px !important;text-align:center !important;padding:80px 50px !important;display:block !important;visibility:visible !important;opacity:1 !important;left:50%;transform:translateX(-50%);box-sizing:border-box;">
         
-        <h2 style="color:white;font-size:36px;margin-bottom:30px;text-align:center;position:relative;z-index:10;font-family:'Orbitron',sans-serif;">📊 Dashboard</h2>
+        <h2 style="color:white;font-size:36px;margin-bottom:30px;text-align:center;position:relative;z-index:10;font-family:'Orbitron',sans-serif;">Dashboard</h2>
         <p style="color:#e0e0e0;font-size:18px;margin-bottom:40px;text-align:center;max-width:800px;margin-left:auto;margin-right:auto;">Track my active works, ongoing projects, and real-time development progress</p>
         
         <!-- Dashboard Grid Container -->
@@ -798,7 +802,7 @@
             <!-- Active Development Card -->
             <div class="dashboard-card active-development" style="background:rgba(0,0,0,0.6);backdrop-filter:blur(3px);border-radius:25px;padding:40px;border:2px solid #00ff88;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;min-height:400px;">
                 <div class="card-header" style="display:flex;align-items:center;gap:15px;margin-bottom:25px;">
-                    <div class="card-icon" style="font-size:40px;">🚀</div>
+                    <div class="card-icon" style="font-size:40px;">Active</div>
                     <div class="card-info">
                         <h3 style="margin:0;color:#00ff88;font-size:22px;">Active Development</h3>
                         <p style="margin:5px 0 0 0;color:#ccc;font-size:14px;">Currently Working On</p>
@@ -849,7 +853,7 @@
                 </div>
             </div>
                 <div class="card-footer" style="text-align:center;">
-                    <span style="color:#ff6b6b;font-size:14px;font-weight:bold;">🎯 2 Achievements This Month</span>
+                    <span style="color:#ff6b6b;font-size:14px;font-weight:bold;">2 Achievements This Month</span>
                     </div>
                 </div>
 
@@ -875,14 +879,14 @@
                     </div>
                 </div>
                 <div class="card-footer" style="text-align:center;">
-                    <span style="color:#4ecdc4;font-size:14px;font-weight:bold;">🚀 2 Projects Queued</span>
+                    <span style="color:#4ecdc4;font-size:14px;font-weight:bold;">2 Projects Queued</span>
                 </div>
             </div>
 
             <!-- Performance Metrics Card -->
             <div class="dashboard-card performance-metrics" style="background:rgba(0,0,0,0.6);backdrop-filter:blur(3px);border-radius:25px;padding:40px;border:2px solid #f39c12;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden;min-height:400px;">
                 <div class="card-header" style="display:flex;align-items:center;gap:15px;margin-bottom:25px;">
-                    <div class="card-icon" style="font-size:40px;">📈</div>
+                    <div class="card-icon" style="font-size:40px;">Metrics</div>
                     <div class="card-info">
                         <h3 style="margin:0;color:#f39c12;font-size:22px;">Performance Metrics</h3>
                         <p style="margin:5px 0 0 0;color:#ccc;font-size:14px;">Real-time Stats</p>
@@ -905,7 +909,7 @@
         </div>
             </div>
                 <div class="card-footer" style="text-align:center;">
-                    <span style="color:#f39c12;font-size:14px;font-weight:bold;">📊 Updated Daily</span>
+                    <span style="color:#f39c12;font-size:14px;font-weight:bold;">Updated Daily</span>
         </div>
             </div>
         </div>
@@ -915,7 +919,7 @@
     <!-- Projects Portal Section -->
         <section class="projects-portal-section" style="position:relative !important;width:100vw !important;min-height:1200px !important;margin-top:160px !important;margin-bottom:100px !important;z-index:1 !important;color:white !important;font-size:24px !important;text-align:center !important;padding:50px !important;display:block !important;visibility:visible !important;opacity:1 !important;left:50%;transform:translateX(-50%);box-sizing:border-box;background-image:url('assets/ChatGPT%20Image%20Aug%205,%202025,%2004_46_21%20AM.png');background-size:cover;background-position:center;background-repeat:no-repeat;">
 
-      <h2 style="color:white;font-size:36px;margin-bottom:20px;text-align:center;position:relative;z-index:10;font-family:'Orbitron',sans-serif;">🚀 Active Projects Portal</h2>
+      <h2 style="color:white;font-size:36px;margin-bottom:20px;text-align:center;position:relative;z-index:10;font-family:'Orbitron',sans-serif;">Active Projects Portal</h2>
       
       <!-- A/B Testing Projects Container (Neural Radial renders here) -->
       <div class="project-cards-container" style="width:100%;min-height:760px;margin-top:20px;"></div>
@@ -934,7 +938,7 @@
             <div class="planet earth" data-category="ai" style="position:absolute;width:198px;height:198px;left:50%;top:25%;transform:translate(-50%,-50%);z-index:10;">
                 <img src="assets/earth.png" alt="Earth" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:50%;z-index:0;pointer-events:none;" />
                 <div class="planet-content" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;text-align:center;color:white;">
-                    <h3 style="font-size:16px;margin:0;">🚀 AI & Automation</h3>
+                    <h3 style="font-size:16px;margin:0;">AI & Automation</h3>
                     </div>
                     <div class="moon-system">
                     <!-- AI Sales Moon - Top Right -->
@@ -1058,7 +1062,7 @@
               
               <!-- Our Vision - Bottom Left (Increased Size + Digital Avatar Text) -->
               <div style="position:absolute;bottom:10px;left:40px;width:320px;height:154px;background:linear-gradient(135deg,rgba(255,215,0,0.2),rgba(255,165,0,0.25));border-radius:16px;padding:22px;border-left:5px solid #ffd700;overflow:hidden;">
-                <h5 style="color:#ffd700;margin:0 0 12px 0;font-family:'Orbitron',sans-serif;font-size:1.2em;">🌟 Our Vision</h5>
+                <h5 style="color:#ffd700;margin:0 0 12px 0;font-family:'Orbitron',sans-serif;font-size:1.2em;">Our Vision</h5>
                 <p style="color:#ffffff;margin:0 0 8px 0;font-size:1em;line-height:1.4;overflow:hidden;">
                   <span class="typing-text" data-text="We believe AI should be as unique as you are! No more boring chatbots - let's create something extraordinary together!" data-speed="35"></span>
                 </p>
@@ -1070,9 +1074,9 @@
               <!-- CENTER COLUMN -->
               <!-- Customization Info - Center (Increased by 20% Vertically) -->
               <div style="position:absolute;top:30px;left:50%;transform:translateX(-50%);width:300px;height:216px;background:linear-gradient(135deg,rgba(0,191,255,0.2),rgba(30,144,255,0.25));border-radius:20px;padding:25px;border:1px solid rgba(0,191,255,0.5);overflow:hidden;">
-                <h5 style="color:#00bfff;margin:0 0 18px 0;font-family:'Orbitron',sans-serif;font-size:1.2em;">🎨 Customization Magic</h5>
+                <h5 style="color:#00bfff;margin:0 0 18px 0;font-family:'Orbitron',sans-serif;font-size:1.2em;">Customization Magic</h5>
                 <p style="color:#ffffff;font-size:1em;line-height:1.5;margin:0;overflow:hidden;">
-                  Transform your AI avatar from quirky aliens to professional executives, match your brand colors & aesthetic, handle sales, support, education - you name it! Make them dance, wave, or even do backflips! Want a dancing penguin in a business suit? We can do that! 🐧✨
+                  Transform your AI avatar from quirky aliens to professional executives, match your brand colors & aesthetic, handle sales, support, education - you name it! Make them dance, wave, or even do backflips! Want a dancing penguin in a business suit? We can do that!
                 </p>
             </div>
               
@@ -1081,7 +1085,7 @@
               <div style="position:absolute;top:30px;right:40px;width:280px;height:180px;background:linear-gradient(135deg,rgba(50,205,50,0.2),rgba(34,139,34,0.25));border-radius:18px;padding:20px;border:1px solid rgba(50,205,50,0.5);overflow:hidden;">
                 <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,#32cd32,transparent);animation:slide 2s linear infinite;"></div>
                 <h5 style="color:#32cd32;margin:0 0 12px 0;font-size:1.1em;display:flex;align-items:center;gap:10px;">
-                  <span style="font-size:1.2em;">🚀</span>
+                  <span style="font-size:1.2em;">Launch</span>
                   Universal Assistant
                 </h5>
                 <p style="color:#ffffff;margin:0;font-size:0.9em;line-height:1.4;overflow:hidden;">
@@ -1093,9 +1097,9 @@
               
               <!-- Avatar Showcase Header - Bottom Right -->
               <div style="position:absolute;bottom:40px;right:40px;width:280px;height:140px;text-align:center;background:linear-gradient(135deg,rgba(255,105,180,0.15),rgba(219,112,147,0.2));border-radius:18px;padding:18px;border:1px solid rgba(255,105,180,0.4);overflow:hidden;">
-                <h4 style="color:#ff69b4;margin:0 0 10px 0;font-family:'Orbitron',sans-serif;text-shadow:0 0 15px rgba(255,105,180,0.6);font-size:1.1em;">👽 Quirky Avatars</h4>
+                <h4 style="color:#ff69b4;margin:0 0 10px 0;font-family:'Orbitron',sans-serif;text-shadow:0 0 15px rgba(255,105,180,0.6);font-size:1.1em;">Quirky Avatars</h4>
                 <p style="color:#ffffff;margin:0;font-size:0.9em;line-height:1.3;overflow:hidden;">
-                  <span class="typing-text" data-text="These are some of the examples of the avatars but you can create and customize ANYTHING you want! 🚀✨" data-speed="40"></span>
+                  <span class="typing-text" data-text="These are some of the examples of the avatars but you can create and customize ANYTHING you want!" data-speed="40"></span>
                 </p>
             </div>
               
@@ -1140,7 +1144,7 @@
         
         <!-- Right Side: Advanced Interactive Contact Buttons -->
         <div style="display:flex;flex-direction:column;gap:20px;">
-          <h3 style="font-family:'Orbitron',sans-serif;color:#00ffee;margin:0;text-align:center;font-size:1.5rem;">🚀 Connect & Collaborate</h3>
+          <h3 style="font-family:'Orbitron',sans-serif;color:#00ffee;margin:0;text-align:center;font-size:1.5rem;">Connect & Collaborate</h3>
           
           <!-- Social Media Holographic Buttons -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
@@ -1221,7 +1225,7 @@
         
         // Initial greeting
         setTimeout(() => {
-          this.showMessage("Hello! I'm your AI assistant. Click me or send a message! 👽✨");
+          this.showMessage("Hello! I'm your AI assistant. Click me or send a message!");
         }, 1000);
       }
       
@@ -1237,11 +1241,11 @@
         
         // Update chat bubble message based on state
         const stateMessages = {
-          'thinking': "Let me think about that... 🤔",
-          'excited': "That's fascinating! 🌟",
-          'responding': "Here's what I found! 📡",
-          'walking': "Exploring the digital realm... 🚶‍♂️",
-          'speaking': "I'm speaking now! 👽💬"
+          'thinking': "Let me think about that...",
+          'excited': "That's fascinating!",
+          'responding': "Here's what I found!",
+          'walking': "Exploring the digital realm...",
+          'speaking': "I'm speaking now!"
         };
         
         if (stateMessages[state]) {
@@ -1313,10 +1317,10 @@
           
           // Simple response logic
           const responses = {
-            'hello': "Hello! I'm your AI assistant. How can I help you today? 🚀",
-            'help': "I can help you with project information, technical questions, or just chat! What would you like to know? 🤖",
-            'projects': "I can tell you about my AI projects, PM experience, or business initiatives. Which area interests you? 📊",
-            'default': "That's interesting! I'm here to help with any questions about my work or just to chat. What would you like to know? ✨"
+            'hello': "Hello! I'm your AI assistant. How can I help you today?",
+            'help': "I can help you with project information, technical questions, or just chat! What would you like to know?",
+            'projects': "I can tell you about my AI projects, PM experience, or business initiatives. Which area interests you?",
+            'default': "That's interesting! I'm here to help with any questions about my work or just to chat. What would you like to know?"
           };
           
           const lowerMessage = userMessage.toLowerCase();
@@ -1376,10 +1380,10 @@
 
     // Moon interaction functionality
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('🚀 DOM LOADED - SCRIPT IS RUNNING!');
-      console.log('🔍 Checking if JavaScript is working...');
-      console.log('🌙 Moons found:', document.querySelectorAll('.moon').length);
-      console.log('📅 Current time:', new Date().toLocaleTimeString());
+      console.log('DOM LOADED - SCRIPT IS RUNNING!');
+      console.log('Checking if JavaScript is working...');
+      console.log('Moons found:', document.querySelectorAll('.moon').length);
+      console.log('Current time:', new Date().toLocaleTimeString());
       
       // Function to setup moon interactions
       function setupMoonInteractions() {
@@ -1524,7 +1528,7 @@
         tooltip.style.transform = 'translateY(0)';
       tooltip.style.zIndex = '99999';
       
-      console.log('🎯 Tooltip should now be visible!');
+      console.log('Tooltip should now be visible!');
     }
     
     function hideTooltip() {
@@ -2032,7 +2036,7 @@
                     applyTheme(themeName) {
                         this.currentTheme = themeName;
                         document.documentElement.setAttribute('data-theme', themeName);
-                        console.log(`🎨 Black Radium theme applied`);
+                        console.log(`Black Radium theme applied`);
                     }
                     
                     animateThemeChange() {
@@ -2166,7 +2170,7 @@
         <script src="assets/js/main.js"></script>
         <script src="projects/components/projects.js"></script>
         
-        <!-- 🚀 Chatbot system removed - will be replaced with portable widget -->
+        <!-- Chatbot system removed - will be replaced with portable widget -->
 
       <!-- PROJECT MODAL -->
       <div id="projectModal" class="modal">
@@ -2309,11 +2313,11 @@
       }
       </style>
 
-      <!-- 🚀 Floating chatbot removed - will be replaced with portable widget -->
+      <!-- Floating chatbot removed - will be replaced with portable widget -->
 
-        <!-- 🚀 Astronaut chatbot removed - will be replaced with portable widget -->
+        <!-- Astronaut chatbot removed - will be replaced with portable widget -->
         
-        <!-- 🚀 Student avatar removed - will be replaced with portable widget -->
+        <!-- Student avatar removed - will be replaced with portable widget -->
 
 
         <!-- Typing Animation Script -->
@@ -2371,10 +2375,10 @@
             // Desktop typing animation
             typeDesktopText();
             
-            // 🚀 Chatbot system removed - will be replaced with portable widget
+            // Chatbot system removed - will be replaced with portable widget
           });
           
-          // 🚀 Chatbot system removed - will be replaced with portable widget
+          // Chatbot system removed - will be replaced with portable widget
         </script>
 
         <!-- Mobile Phone Deep Dive Popup -->
@@ -2412,7 +2416,7 @@
             </div>
         </div>
 
-        <!-- 🚀 Chatbot styles removed - will be replaced with portable widget styles -->
+        <!-- Chatbot styles removed - will be replaced with portable widget styles -->
             
             .student-thinking-bubble.thinking-active .thinking-text {
                 animation: thinking-text-pulse 2s ease-in-out infinite;
@@ -2449,32 +2453,32 @@
                     <div style="display:flex;flex-direction:column;gap:12px;">
                         <!-- Project Overview Card -->
                         <div style="background:#374151;border-radius:12px;padding:16px;box-shadow:0 4px 15px rgba(55,65,81,0.3);border:2px solid #4b5563;">
-                            <h3 style="color:#ffffff;margin:0 0 10px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">📋 Project Overview</h3>
-                            <p style="color:#ffffff;margin:0;line-height:1.5;font-size:0.85em;font-family:'SF Pro Display',sans-serif;text-align:left;">${project.detailedDescription || project.description} No magic wands here - just good old-fashioned coding wizardry! 🧙‍♂️</p>
+                            <h3 style="color:#ffffff;margin:0 0 10px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">Project Overview</h3>
+                            <p style="color:#ffffff;margin:0;line-height:1.5;font-size:0.85em;font-family:'SF Pro Display',sans-serif;text-align:left;">${project.detailedDescription || project.description} No magic wands here - just good old-fashioned coding wizardry!</p>
                         </div>
 
                         <!-- Technology Stack Card -->
                         <div style="background:#1e40af;border-radius:12px;padding:16px;box-shadow:0 4px 15px rgba(30,64,175,0.3);border:2px solid #1d4ed8;">
-                            <h3 style="color:#ffffff;margin:0 0 10px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">🛠️ Technology Stack</h3>
-                            <p style="color:#ffffff;margin:0;line-height:1.5;font-size:0.85em;font-family:'SF Pro Display',sans-serif;text-align:left;">Built with: ${techStack}. Because why reinvent the wheel when you can stack existing wheels? 🎯</p>
+                            <h3 style="color:#ffffff;margin:0 0 10px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">Technology Stack</h3>
+                            <p style="color:#ffffff;margin:0;line-height:1.5;font-size:0.85em;font-family:'SF Pro Display',sans-serif;text-align:left;">Built with: ${techStack}. Because why reinvent the wheel when you can stack existing wheels?</p>
                         </div>
 
                         <!-- Key Features Card -->
                         <div style="background:#5b21b6;border-radius:12px;padding:16px;box-shadow:0 4px 15px rgba(91,33,182,0.3);border:2px solid #7c3aed;">
-                            <h3 style="color:#ffffff;margin:0 0 10px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">⭐ Key Features</h3>
+                            <h3 style="color:#ffffff;margin:0 0 10px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">Key Features</h3>
                             <p style="color:#ffffff;margin:0;line-height:1.5;font-size:0.85em;font-family:'SF Pro Display',sans-serif;text-align:left;">${features}. These aren't just features - they're the cool kids at the tech party! 🎉</p>
                         </div>
 
                         <!-- Project Goals Card -->
                         <div style="background:#991b1b;border-radius:12px;padding:16px;box-shadow:0 4px 15px rgba(153,27,27,0.3);border:2px solid #dc2626;">
-                            <h3 style="color:#ffffff;margin:0 0 10px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">🎯 Project Goals</h3>
+                            <h3 style="color:#ffffff;margin:0 0 10px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">Project Goals</h3>
                             <p style="color:#ffffff;margin:0;line-height:1.5;font-size:0.85em;font-family:'SF Pro Display',sans-serif;text-align:left;">${project.goals || 'To create innovative solutions that enhance user experience and productivity through cutting-edge AI technology.'} Ambitious? Maybe. Achievable? Definitely! 💪</p>
                         </div>
 
                         <!-- Current Progress Card -->
                         <div style="background:#0e7490;border-radius:12px;padding:16px;box-shadow:0 4px 15px rgba(14,116,144,0.3);border:2px solid #0891b2;">
-                            <h3 style="color:#ffffff;margin:0 0 10px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">🚀 Current Progress</h3>
-                            <p style="color:#ffffff;margin:0;line-height:1.5;font-size:0.85em;font-family:'SF Pro Display',sans-serif;text-align:left;">${project.progress || 'Core functionality completed, actively working on advanced features and optimization.'} We're not just coding - we're coding with style! ✨</p>
+                            <h3 style="color:#ffffff;margin:0 0 10px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">Current Progress</h3>
+                            <p style="color:#ffffff;margin:0;line-height:1.5;font-size:0.85em;font-family:'SF Pro Display',sans-serif;text-align:left;">${project.progress || 'Core functionality completed, actively working on advanced features and optimization.'} We're not just coding - we're coding with style!</p>
                         </div>
 
                         <!-- Future Roadmap Card -->
@@ -2491,7 +2495,7 @@
 
                         <!-- Project Controls Card -->
                         <div style="background:#1f2937;border-radius:12px;padding:16px;box-shadow:0 4px 15px rgba(31,41,55,0.3);border:2px solid #374151;">
-                            <h3 style="color:#ffffff;margin:0 0 12px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">🎛️ Project Controls</h3>
+                            <h3 style="color:#ffffff;margin:0 0 12px 0;font-size:1em;font-weight:600;font-family:'SF Pro Display',sans-serif;">Project Controls</h3>
                             
                             <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px;">
                                 ${project.demoUrl && project.demoUrl !== '#' ? `<a href="${project.demoUrl}" target="_blank" style="background:#1e40af;color:#ffffff;border:none;padding:10px 18px;border-radius:20px;font-size:12px;text-decoration:none;transition:all 0.3s ease;text-align:center;font-family:'SF Pro Display',sans-serif;font-weight:500;">📚 Experience the Story</a>` : ''}
@@ -2499,7 +2503,7 @@
                             </div>
 
                             <div style="background:#374151;border-radius:8px;padding:12px;border:1px solid #4b5563;">
-                                <h4 style="color:#ffffff;margin:0 0 10px 0;font-size:0.9em;font-weight:600;font-family:'SF Pro Display',sans-serif;">📊 Project Status</h4>
+                                <h4 style="color:#ffffff;margin:0 0 10px 0;font-size:0.9em;font-weight:600;font-family:'SF Pro Display',sans-serif;">Project Status</h4>
                                 <p style="color:#ffffff;margin:0;font-size:0.8em;font-family:'SF Pro Display',sans-serif;text-align:left;">${project.status} - This project is actively being developed and maintained. No coffee breaks allowed! ☕</p>
                                 <p style="color:#d1d5db;margin:8px 0 0 0;font-size:0.75em;font-family:'SF Pro Display',sans-serif;text-align:left;">Last Updated: ${project.lastUpdated || 'Recently'} - Fresh off the coding press! 🆕</p>
                             </div>
@@ -2533,12 +2537,12 @@
             });
         </script>
 
-        <!-- 🚀 PORTABLE CHATBOT WIDGET INTEGRATION -->
+        <!-- PORTABLE CHATBOT WIDGET INTEGRATION -->
                  <script>
              // Preload the GIF immediately
              const preloadGif = new Image();
              preloadGif.src = 'assets/20250821-1758-Relaxed-Chatbot--unscreen-ezgif.com-apng-to-gif-converter.gif';
-             preloadGif.onload = () => console.log('🚀 [PRELOAD] GIF loaded successfully');
+             preloadGif.onload = () => console.log('[PRELOAD] GIF loaded successfully');
              preloadGif.onerror = () => console.error('❌ [PRELOAD] GIF failed to load');
              
              // Set permanent font: Albert Sans + Audiowide
@@ -2552,7 +2556,7 @@
                      heading.style.fontFamily = "'Audiowide', cursive";
                  });
                  
-                 console.log('🎨 Font set to: Albert Sans + Audiowide (Clean & Professional)');
+                 console.log('Font set to: Albert Sans + Audiowide (Clean & Professional)');
              });
              
              console.log('🔍 Debug: About to load chatbot script...');
@@ -2561,7 +2565,7 @@
              if ('serviceWorker' in navigator) {
                  navigator.serviceWorker.register('/sw.js')
                      .then((registration) => {
-                         console.log('🚀 [SW] Service Worker registered:', registration);
+                         console.log('[SW] Service Worker registered:', registration);
                      })
                      .catch((error) => {
                          console.error('❌ [SW] Service Worker registration failed:', error);
@@ -2580,7 +2584,7 @@
                 console.log('🔍 Debug: initializeEnhancedChatbot called, EnhancedAgenticChatbotWidget =', typeof EnhancedAgenticChatbotWidget);
                 
                 if (typeof EnhancedAgenticChatbotWidget !== 'undefined') {
-                    console.log('🚀 Initializing Enhanced Agentic AI Assistant with Proper 3D Avatar System...');
+                    console.log('Initializing Enhanced Agentic AI Assistant with Proper 3D Avatar System...');
                     
                     // Initialize the enhanced chatbot with PROPER 3D AVATAR SYSTEM
                     window.enhancedChatbotWidget = new EnhancedAgenticChatbotWidget({
@@ -2648,11 +2652,11 @@
                         onMessageReceived: function(response) {
                             console.log('📥 Enhanced response received:', response);
                             if (response.langgraphFeatures) {
-                                console.log('🔄 LangGraph features:', response.langgraphFeatures);
+                                console.log('LangGraph features:', response.langgraphFeatures);
                             }
                         },
                         onWorkflowStep: function(step, intent) {
-                            console.log(`🔄 Workflow Step ${step}: ${intent}`);
+                            console.log(`Workflow Step ${step}: ${intent}`);
                         },
                         onError: function(error) {
                             console.error('❌ Enhanced chatbot error:', error);
@@ -2660,8 +2664,8 @@
                     });
                     
                     console.log('✅ Enhanced Agentic AI Assistant initialized successfully!');
-                    console.log('🚀 LangGraph workflows enabled:', window.enhancedChatbotWidget.config.enableLangGraph);
-                    console.log('📊 Stateful conversations enabled:', window.enhancedChatbotWidget.config.enableStatePersistence);
+                    console.log('LangGraph workflows enabled:', window.enhancedChatbotWidget.config.enableLangGraph);
+                    console.log('Stateful conversations enabled:', window.enhancedChatbotWidget.config.enableStatePersistence);
                 } else {
                     console.log('⏳ Waiting for EnhancedChatbotWidget to load...');
                     setTimeout(initializeEnhancedChatbot, 100);
