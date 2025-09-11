@@ -34,11 +34,7 @@
             padding: 0;
             font-family: 'Poppins', sans-serif;
             color: var(--text, #fff);
-            background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(15,32,39,0.3) 70%, rgba(32,58,67,0.3) 100%);
-            background-size: cover;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-position: center;
+            background: transparent;
             transition: background 0.5s ease;
             height: auto;
             overflow-x: hidden;
@@ -241,7 +237,7 @@
 
         /* Default theme */
         body {
-            background: linear-gradient(45deg, #000000, #1a1a1a);
+            background: transparent;
             transition: background-image 0.5s ease, background 0.5s ease;
         }
 
@@ -475,7 +471,7 @@
             width: 160px;
         }
         /* IMPORTANT: Do NOT add overflow:hidden to html or body! This breaks scrolling. Only #space should have overflow:hidden. */
-        html,body{margin:0;width:100vw;height:100vh;background:#000;}
+        html,body{margin:0;width:100vw;height:100vh;background:transparent;}
         #space{width:100vw;height:100vh;overflow:hidden;}
 
         /* Professional GIF Alien Character Styles */
