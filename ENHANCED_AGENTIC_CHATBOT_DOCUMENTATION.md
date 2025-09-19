@@ -90,7 +90,7 @@ enhanced-agentic-chatbot/
 ### **1. Prerequisites**
 - Python 3.8 or higher
 - pip3
-- Node.js (for frontend integration)
+- Node.js (for Frontend integration)
 
 ### **2. Installation**
 ```bash
@@ -220,7 +220,7 @@ GET /status
         "Error Handling",
         "Tool Integration"
     ],
-    "models": {
+    "Models": {
         "primary": "gpt-3.5-turbo",
         "fallback": "microsoft/DialoGPT-medium"
     }

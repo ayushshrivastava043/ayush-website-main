@@ -50,7 +50,7 @@ website/
 ├── 📦 backup/                    # Essential server backups
 │   ├── server.js                 # Old simple server
 │   ├── server-manager.js         # Old server manager
-│   ├── simple_server.py          # Old Python server
+│   ├── SimpleServer.py          # Old Python server
 │   ├── launch.sh                 # Old launcher
 │   └── server.log                # Server logs
 │

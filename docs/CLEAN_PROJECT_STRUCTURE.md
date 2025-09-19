@@ -39,31 +39,31 @@
 ### **🚀 MAIN SERVERS**
 | File Name | Function | Purpose |
 |-----------|----------|---------|
-| `app_runner_enhanced.py` | 🎯 **MAIN FLASK SERVER** | Complete system with all logic |
-| `app_runner_simple.py` | 🧪 **Simple Version** | Simple version for testing and development |
-| `main.py` | 🔄 **Alternative Entry** | Alternative main entry point |
+| `AppRunner.py` | 🎯 **MAIN FLASK SERVER** | Complete system with all logic |
+| `AppRunnerSimple.py` | 🧪 **Simple Version** | Simple version for testing and development |
+| `Main.py` | 🔄 **Alternative Entry** | Alternative main entry point |
 
 ### **💬 CHAT INTERFACES**
 | File Name | Function | Purpose |
 |-----------|----------|---------|
-| `web_chat_interface.py` | 🌐 **Web UI** | User interface for chatting |
-| `web_chat_interface_portfolio.py` | 🎨 **Portfolio UI** | Portfolio-specific web interface |
-| `simple_local_chatbot.py` | 🏠 **Standalone Chat** | Standalone chat logic (alternative) |
-| `local_llm_chatbot.py` | 🤖 **Local AI** | Local LLM integration and AI processing |
+| `WebChatInterface.py` | 🌐 **Web UI** | User interface for chatting |
+| `WebChatPortfolio.py` | 🎨 **Portfolio UI** | Portfolio-specific web interface |
+| `SimpleLocalChatbot.py` | 🏠 **Standalone Chat** | Standalone chat logic (alternative) |
+| `LocalLlmChatbot.py` | 🤖 **Local AI** | Local LLM integration and AI processing |
 
 ### **🧪 TESTING & DEBUGGING**
 | File Name | Function | Purpose |
 |-----------|----------|---------|
-| `test_backend.py` | 🔍 **Backend Testing** | Backend testing and debugging |
-| `simple_test_server.py` | 🧪 **Test Server** | Simple test server |
-| `simple_test_server_no_debug.py` | 🚫 **No Debug Server** | Test server without debug mode |
+| `TestBackend.py` | 🔍 **Backend Testing** | Backend testing and debugging |
+| `SimpleTestServer.py` | 🧪 **Test Server** | Simple test server |
+| `SimpleTestServerNoDebug.py` | 🚫 **No Debug Server** | Test server without debug mode |
 | `clean_server.py` | ✨ **Clean Server** | Clean server implementation |
 
 ### **📊 DATA STRUCTURES**
 | File Name | Function | Purpose |
 |-----------|----------|---------|
 | `data_classes.py` | 🏗️ **Data Models** | Data structures and models |
-| `data_classes_simple.py` | 🧹 **Simple Models** | Simplified data structures |
+| `DataClasses.py` | 🧹 **Simple Models** | Simplified data structures |
 
 ---
 
@@ -81,10 +81,10 @@
 ### **🔐 CORE SERVICES**
 | File Name | Function | Purpose |
 |-----------|----------|---------|
-| `auth_wrapper.py` | 🔒 **Authentication** | Authentication and security |
-| `audio_service.py` | 🎵 **Audio Processing** | Audio processing capabilities |
-| `external_communication_manager.py` | 🌍 **External APIs** | External API communication |
-| `data_crawler.py` | 🕷️ **Data Crawling** | Data crawling and extraction |
+| `AuthWrapper.py` | 🔒 **Authentication** | Authentication and security |
+| `AudioService.py` | 🎵 **Audio Processing** | Audio processing capabilities |
+| `ExternalCommunicationManager.py` | 🌍 **External APIs** | External API communication |
+| `DataCrawler.py` | 🕷️ **Data Crawling** | Data crawling and extraction |
 
 ---
 
@@ -117,7 +117,7 @@ node server/chatbot-dashboard.js
 
 # Start chatbot core
 cd /Users/ayush/AI_Projects/Chatbot
-python core/run_minimal.py
+python core/RunMinimal.py
 ```
 
 ### **📊 Access Points**

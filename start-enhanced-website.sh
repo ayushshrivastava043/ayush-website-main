@@ -172,9 +172,9 @@ start_website_server() {
     print_status "Starting website server..."
     
     # Check if we have a Python web server
-    if [ -f "app.py" ]; then
+    if [ -f "App.py" ]; then
         print_success "Starting Flask website server..."
-        python3 app.py &
+        python3 App.py &
         WEBSITE_PID=$!
         sleep 2
         

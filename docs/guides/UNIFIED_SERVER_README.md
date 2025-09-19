@@ -151,7 +151,7 @@ lsof -i :8080
 ### Before (Multiple Files)
 - `server.js` → Port 4000
 - `server-manager.js` → Port 4000
-- `simple_server.py` → Port 8080
+- `SimpleServer.py` → Port 8080
 - `AI_Assistant/servers/server.py` → Port 8000/8001
 
 ### After (Unified)

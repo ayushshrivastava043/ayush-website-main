@@ -37,13 +37,13 @@ The chatbot generator has been successfully integrated with your main website as
 
 ### **Start Chatbot Server:**
 ```bash
-cd "/Users/ayush/AI_Projects/Website - main website project"
+cd "/Users/ayush/AI_Projects/WebsiteMain"
 ./start-chatbot-server.sh
 ```
 
 ### **Start Website Server:**
 ```bash
-cd "/Users/ayush/AI_Projects/Website - main website project"
+cd "/Users/ayush/AI_Projects/WebsiteMain"
 python3 -m http.server 4000
 ```
 

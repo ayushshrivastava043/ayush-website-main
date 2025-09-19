@@ -67,7 +67,7 @@ echo "Press Ctrl+C to stop the server"
 echo "=================================="
 
 # Start the Flask application
-python3 app.py
+python3 App.py
 
 echo ""
 echo "👋 Enhanced AI Portal stopped."

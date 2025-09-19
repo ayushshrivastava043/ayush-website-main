@@ -111,7 +111,7 @@ python tester_dashboard.py
 ## 📊 **File Organization**
 
 - **Backend Logic**: Python files in root and `backend/`
-- **Frontend Assets**: HTML, CSS, JS in `frontend/`
+- **Frontend Assets**: HTML, CSS, JS in `Frontend/`
 - **Configuration**: YAML files in `configs/`
 - **Documentation**: Markdown files in `docs/`
 - **Utilities**: Helper scripts in `utils/`
@@ -119,7 +119,7 @@ python tester_dashboard.py
 ## 🎨 **Customization**
 
 - **Themes**: Modify CSS in `assets/css/`
-- **Templates**: Edit HTML in `frontend/`
+- **Templates**: Edit HTML in `Frontend/`
 - **Logic**: Update Python files in root and `backend/`
 - **Configs**: Modify YAML files in `configs/`
 

@@ -16,7 +16,7 @@ We have successfully enhanced your existing AI Portal with a comprehensive, pers
 - **Mobile Responsive**: Optimized for all device sizes
 - **Floating Particles**: Animated background with theme-aware particles
 
-### **2. Enhanced Flask Backend** (`app.py`)
+### **2. Enhanced Flask Backend** (`App.py`)
 - **New Routes**: `/enhanced` for the enhanced portal
 - **API Endpoints**: 
   - `/api/profile` - User profile information
@@ -113,10 +113,10 @@ We have successfully enhanced your existing AI Portal with a comprehensive, pers
 ### **1. Start the Enhanced Portal**
 ```bash
 # Navigate to AI Portal directory
-cd "AI_Portal - AI project management portal"
+cd "AIPortal"
 
 # Start the server (will use port 6000)
-python3 app.py
+python3 App.py
 ```
 
 ### **2. Access the Portal**

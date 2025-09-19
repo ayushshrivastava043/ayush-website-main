@@ -104,7 +104,7 @@
         width: 100% !important;
         max-width: 100% !important;
         min-height: auto !important;
-        margin: 30px 0 !important;
+        margin: 20px 0 !important;
         padding: 30px 15px !important;
         overflow: hidden !important;
         position: relative !important;
@@ -247,7 +247,7 @@
         width: 100% !important;
         max-width: 100% !important;
         padding: 30px 15px !important;
-        margin: 30px 0 !important;
+        margin: 20px 0 !important;
         overflow: hidden !important;
         position: relative !important;
         border-top: 2px solid rgba(0, 255, 238, 0.3) !important;

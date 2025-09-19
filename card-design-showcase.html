@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Card Design Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00ffee, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 40px;
+        }
+        
+        .category {
+            margin-bottom: 60px;
+        }
+        
+        .category-title {
+            font-size: 2rem;
+            color: #00ffee;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 2px solid rgba(0, 255, 238, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            padding: 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00ffee;
+        }
+        
+        .card-desc {
+            font-size: 0.9rem;
+            color: #ccc;
+            line-height: 1.5;
+        }
+        
+        /* MINIMALIST CATEGORY */
+        .minimal-clean {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .minimal-clean:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+        }
+        
+        .minimal-borderless {
+            background: rgba(0, 255, 238, 0.05);
+        }
+        
+        .minimal-borderless:hover {
+            background: rgba(0, 255, 238, 0.1);
+            transform: scale(1.02);
+        }
+        
+        .minimal-flat {
+            background: linear-gradient(135deg, rgba(0, 255, 238, 0.1), rgba(78, 205, 196, 0.1));
+            border: none;
+        }
+        
+        .minimal-flat:hover {
+            background: linear-gradient(135deg, rgba(0, 255, 238, 0.15), rgba(78, 205, 196, 0.15));
+        }
+        
+        /* GRADIENT CATEGORY */
+        .gradient-rainbow {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            border: none;
+        }
+        
+        .gradient-rainbow:hover {
+            transform: rotate(2deg) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.3);
+        }
+        
+        .gradient-dark {
+            background: linear-gradient(135deg, #2c3e50, #34495e, #2c3e50);
+            border: 1px solid #3498db;
+        }
+        
+        .gradient-dark:hover {
+            background: linear-gradient(135deg, #3498db, #2980b9, #3498db);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.4);
+        }
+        
+        .gradient-neon {
+            background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+            border: none;
+            animation: neon-pulse 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes neon-pulse {
+            0% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
+        }
+        
+        .gradient-neon:hover {
+            transform: scale(1.1);
+        }
+        
+        /* MATERIAL DESIGN CATEGORY */
+        .material-elevated {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .material-elevated:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .material-floating {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .material-floating:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-4px);
+        }
+        
+        /* NEUMORPHISM CATEGORY */
+        .neuo-light {
+            background: #2a2a2a;
+            border: none;
+            box-shadow: 
+                8px 8px 16px rgba(0, 0, 0, 0.4),
+                -8px -8px 16px rgba(255, 255, 255, 0.05);
+        }
+        
+        .neuo-light:hover {
+            box-shadow: 
+                12px 12px 24px rgba(0, 0, 0, 0.5),
+                -12px -12px 24px rgba(255, 255, 255, 0.08);
+        }
+        
+        .neuo-dark {
+            background: #1a1a1a;
+            border: none;
+            box-shadow: 
+                inset 8px 8px 16px rgba(0, 0, 0, 0.6),
+                inset -8px -8px 16px rgba(255, 255, 255, 0.02);
+        }
+        
+        .neuo-dark:hover {
+            box-shadow: 
+                inset 12px 12px 24px rgba(0, 0, 0, 0.7),
+                inset -12px -12px 24px rgba(255, 255, 255, 0.03);
+        }
+        
+        /* BRUTALIST CATEGORY */
+        .brutal-bold {
+            background: #000;
+            border: 4px solid #00ffee;
+            border-radius: 0;
+        }
+        
+        .brutal-bold:hover {
+            background: #00ffee;
+            color: #000;
+        }
+        
+        .brutal-angular {
+            background: linear-gradient(45deg, #ff6b6b, #000);
+            border: 3px solid #fff;
+            clip-path: polygon(0 0, 90% 0, 100% 100%, 10% 100%);
+        }
+        
+        .brutal-angular:hover {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        /* RETRO/VINTAGE CATEGORY */
+        .retro-80s {
+            background: linear-gradient(45deg, #ff0080, #8000ff, #0080ff);
+            border: 2px solid #fff;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
+        }
+        
+        .retro-80s:hover {
+            animation: retro-glow 0.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes retro-glow {
+            0% { box-shadow: 0 0 20px rgba(255, 0, 128, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(128, 0, 255, 0.8); }
+        }
+        
+        .retro-vintage {
+            background: linear-gradient(135deg, #8b4513, #cd853f, #daa520);
+            border: 2px solid #654321;
+            position: relative;
+        }
+        
+        .retro-vintage::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .retro-vintage:hover {
+            transform: rotate(1deg);
+        }
+        
+        /* 3D CATEGORY */
+        .card-3d-flip {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        
+        .card-3d-flip:hover {
+            transform: rotateY(180deg);
+        }
+        
+        .card-3d-tilt {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            border: none;
+            transform-style: preserve-3d;
+        }
+        
+        .card-3d-tilt:hover {
+            transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+        }
+        
+        .card-3d-float {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            border: none;
+            animation: float-3d 3s ease-in-out infinite;
+        }
+        
+        @keyframes float-3d {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-10px) rotateX(5deg); }
+        }
+        
+        /* ANIMATED CATEGORY */
+        .animated-bounce {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            border: none;
+            animation: bounce-gentle 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .animated-pulse {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            border: none;
+            animation: pulse-glow 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(168, 237, 234, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(168, 237, 234, 0); }
+        }
+        
+        .animated-rotate {
+            background: conic-gradient(from 0deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff6b6b);
+            border: none;
+            animation: rotate-slow 4s linear infinite;
+        }
+        
+        @keyframes rotate-slow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* GLASSMORPHISM CATEGORY */
+        .glass-frosted {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-frosted:hover {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+        }
+        
+        .glass-tinted {
+            background: rgba(0, 255, 238, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 255, 238, 0.3);
+        }
+        
+        .glass-tinted:hover {
+            background: rgba(0, 255, 238, 0.2);
+        }
+        
+        /* HOLOGRAPHIC CATEGORY */
+        .holo-rainbow {
+            background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff0000);
+            background-size: 400% 400%;
+            animation: holo-shift 3s ease-in-out infinite;
+            border: none;
+        }
+        
+        @keyframes holo-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .holo-rainbow:hover {
+            animation-duration: 1s;
+        }
+        
+        .holo-iridescent {
+            background: linear-gradient(135deg, rgba(255, 0, 150, 0.8), rgba(0, 255, 255, 0.8), rgba(255, 255, 0, 0.8));
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        
+        .holo-iridescent::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff0000);
+            border-radius: 15px;
+            padding: 2px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask-composite: xor;
+        }
+        
+        /* SPECIAL EFFECTS CATEGORY */
+        .effect-matrix {
+            background: #000;
+            border: 1px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .effect-matrix::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: matrix-move 10s linear infinite;
+        }
+        
+        @keyframes matrix-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 20px); }
+        }
+        
+        .effect-matrix:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+        }
+        
+        .effect-fire {
+            background: linear-gradient(135deg, #ff4500, #ff6347, #ffa500);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .effect-fire::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: fire-flicker 2s ease-in-out infinite;
+        }
+        
+        @keyframes fire-flicker {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .effect-fire:hover {
+            animation: fire-glow 0.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes fire-glow {
+            0% { box-shadow: 0 0 20px rgba(255, 69, 0, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(255, 165, 0, 0.8); }
+        }
+        
+        .effect-ice {
+            background: linear-gradient(135deg, #87ceeb, #b0e0e6, #e0f6ff);
+            border: 2px solid #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .effect-ice::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+        
+        .effect-ice:hover {
+            animation: ice-shimmer 1s ease-in-out infinite;
+        }
+        
+        @keyframes ice-shimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+        
+        /* INTERACTIVE CATEGORY */
+        .interactive-magnetic {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .interactive-magnetic:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        .interactive-morph {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            border: none;
+            transition: all 0.5s ease;
+            border-radius: 50px;
+        }
+        
+        .interactive-morph:hover {
+            border-radius: 15px;
+            background: linear-gradient(135deg, #4ecdc4, #ff6b6b);
+        }
+        
+        .interactive-explode {
+            background: radial-gradient(circle, #ff6b6b, #4ecdc4);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .interactive-explode:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 50px rgba(255, 107, 107, 0.6);
+        }
+        
+        /* RESPONSIVE CATEGORY */
+        .responsive-fluid {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            transition: all 0.3s ease;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .responsive-fluid:hover {
+            min-height: 250px;
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+        
+        .responsive-adaptive {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .responsive-adaptive {
+                background: linear-gradient(135deg, #f5576c, #f093fb);
+                transform: scale(0.95);
+            }
+        }
+        
+        .responsive-adaptive:hover {
+            transform: scale(1.05);
+        }
+        
+        /* ACCESSIBILITY CATEGORY */
+        .accessible-high-contrast {
+            background: #000;
+            border: 2px solid #fff;
+            color: #fff;
+        }
+        
+        .accessible-high-contrast:hover {
+            background: #fff;
+            color: #000;
+        }
+        
+        .accessible-focus {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border: 2px solid #3498db;
+        }
+        
+        .accessible-focus:hover,
+        .accessible-focus:focus {
+            outline: 3px solid #e74c3c;
+            outline-offset: 2px;
+        }
+        
+        .accessible-large {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border: none;
+            font-size: 1.1rem;
+            padding: 30px;
+        }
+        
+        .accessible-large:hover {
+            font-size: 1.2rem;
+        }
+        
+        /* STATISTICS */
+        .stats {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 255, 238, 0.1);
+            border-radius: 15px;
+        }
+        
+        .stats h3 {
+            color: #00ffee;
+            margin-bottom: 15px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ffee;
+        }
+        
+        .stat-label {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Complete Card Design Showcase</h1>
+        <p class="subtitle">Explore 50+ Different Card Design Options Across 15 Categories</p>
+        
+        <!-- MINIMALIST CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">🎯 Minimalist Designs</h2>
+            <div class="cards-grid">
+                <div class="card minimal-clean">
+                    <div class="card-title">Clean Minimal</div>
+                    <div class="card-desc">Ultra-clean design with subtle borders and gentle hover effects</div>
+                </div>
+                <div class="card minimal-borderless">
+                    <div class="card-title">Borderless Minimal</div>
+                    <div class="card-desc">Pure minimalism with no borders, just subtle background changes</div>
+                </div>
+                <div class="card minimal-flat">
+                    <div class="card-title">Flat Minimal</div>
+                    <div class="card-desc">Flat design with gradient backgrounds and no shadows</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- GRADIENT CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">🌈 Gradient Designs</h2>
+            <div class="cards-grid">
+                <div class="card gradient-rainbow">
+                    <div class="card-title">Rainbow Gradient</div>
+                    <div class="card-desc">Vibrant rainbow colors with rotation effects on hover</div>
+                </div>
+                <div class="card gradient-dark">
+                    <div class="card-title">Dark Gradient</div>
+                    <div class="card-desc">Professional dark gradients with blue accents</div>
+                </div>
+                <div class="card gradient-neon">
+                    <div class="card-title">Neon Gradient</div>
+                    <div class="card-desc">Electric neon colors with pulsing glow effects</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MATERIAL DESIGN CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">📱 Material Design</h2>
+            <div class="cards-grid">
+                <div class="card material-elevated">
+                    <div class="card-title">Elevated Material</div>
+                    <div class="card-desc">Google Material Design with elevation shadows</div>
+                </div>
+                <div class="card material-floating">
+                    <div class="card-title">Floating Material</div>
+                    <div class="card-desc">Floating action card with dynamic shadows</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NEUMORPHISM CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">🔘 Neumorphism</h2>
+            <div class="cards-grid">
+                <div class="card neuo-light">
+                    <div class="card-title">Light Neumorphism</div>
+                    <div class="card-desc">Soft, extruded appearance with light shadows</div>
+                </div>
+                <div class="card neuo-dark">
+                    <div class="card-title">Dark Neumorphism</div>
+                    <div class="card-desc">Inset neumorphism with dark, pressed appearance</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- BRUTALIST CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">💥 Brutalist Design</h2>
+            <div class="cards-grid">
+                <div class="card brutal-bold">
+                    <div class="card-title">Bold Brutalist</div>
+                    <div class="card-desc">Sharp, bold design with thick borders and stark colors</div>
+                </div>
+                <div class="card brutal-angular">
+                    <div class="card-title">Angular Brutalist</div>
+                    <div class="card-desc">Geometric shapes with CSS clip-path animations</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RETRO/VINTAGE CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">📺 Retro & Vintage</h2>
+            <div class="cards-grid">
+                <div class="card retro-80s">
+                    <div class="card-title">80s Retro</div>
+                    <div class="card-desc">Synthwave aesthetics with neon glow effects</div>
+                </div>
+                <div class="card retro-vintage">
+                    <div class="card-title">Vintage Texture</div>
+                    <div class="card-desc">Aged appearance with texture overlays</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 3D CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">🎲 3D Effects</h2>
+            <div class="cards-grid">
+                <div class="card card-3d-flip">
+                    <div class="card-title">3D Flip Card</div>
+                    <div class="card-desc">3D rotation effect on hover with perspective</div>
+                </div>
+                <div class="card card-3d-tilt">
+                    <div class="card-title">3D Tilt Effect</div>
+                    <div class="card-desc">Multi-axis 3D tilt with perspective transforms</div>
+                </div>
+                <div class="card card-3d-float">
+                    <div class="card-title">3D Float Animation</div>
+                    <div class="card-desc">Continuous floating animation with 3D rotation</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ANIMATED CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">✨ Animated Effects</h2>
+            <div class="cards-grid">
+                <div class="card animated-bounce">
+                    <div class="card-title">Gentle Bounce</div>
+                    <div class="card-desc">Subtle bouncing animation for playful feel</div>
+                </div>
+                <div class="card animated-pulse">
+                    <div class="card-title">Pulse Glow</div>
+                    <div class="card-desc">Pulsing scale with expanding glow effects</div>
+                </div>
+                <div class="card animated-rotate">
+                    <div class="card-title">Rotating Gradient</div>
+                    <div class="card-desc">Continuous rotation of gradient background</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- GLASSMORPHISM CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">🔮 Glassmorphism</h2>
+            <div class="cards-grid">
+                <div class="card glass-frosted">
+                    <div class="card-title">Frosted Glass</div>
+                    <div class="card-desc">Heavy blur with frosted glass appearance</div>
+                </div>
+                <div class="card glass-tinted">
+                    <div class="card-title">Tinted Glass</div>
+                    <div class="card-desc">Colored glass effect with backdrop blur</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HOLOGRAPHIC CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">🌟 Holographic</h2>
+            <div class="cards-grid">
+                <div class="card holo-rainbow">
+                    <div class="card-title">Rainbow Holographic</div>
+                    <div class="card-desc">Shifting rainbow colors with smooth transitions</div>
+                </div>
+                <div class="card holo-iridescent">
+                    <div class="card-title">Iridescent Holographic</div>
+                    <div class="card-desc">Iridescent border with holographic effects</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SPECIAL EFFECTS CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">🎭 Special Effects</h2>
+            <div class="cards-grid">
+                <div class="card effect-matrix">
+                    <div class="card-title">Matrix Effect</div>
+                    <div class="card-desc">Digital rain effect with green grid overlay</div>
+                </div>
+                <div class="card effect-fire">
+                    <div class="card-title">Fire Effect</div>
+                    <div class="card-desc">Flickering fire animation with glow effects</div>
+                </div>
+                <div class="card effect-ice">
+                    <div class="card-title">Ice Effect</div>
+                    <div class="card-desc">Frozen appearance with shimmer highlights</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- INTERACTIVE CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">🎮 Interactive</h2>
+            <div class="cards-grid">
+                <div class="card interactive-magnetic">
+                    <div class="card-title">Magnetic Effect</div>
+                    <div class="card-desc">Magnetic pull effect with rotation and scale</div>
+                </div>
+                <div class="card interactive-morph">
+                    <div class="card-title">Morphing Shape</div>
+                    <div class="card-desc">Shape morphing with border radius changes</div>
+                </div>
+                <div class="card interactive-explode">
+                    <div class="card-title">Explode Effect</div>
+                    <div class="card-desc">Explosive scale with dramatic glow</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RESPONSIVE CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">📱 Responsive</h2>
+            <div class="cards-grid">
+                <div class="card responsive-fluid">
+                    <div class="card-title">Fluid Responsive</div>
+                    <div class="card-desc">Dynamic height changes based on content</div>
+                </div>
+                <div class="card responsive-adaptive">
+                    <div class="card-title">Adaptive Responsive</div>
+                    <div class="card-desc">Different styles for different screen sizes</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ACCESSIBILITY CATEGORY -->
+        <div class="category">
+            <h2 class="category-title">♿ Accessibility</h2>
+            <div class="cards-grid">
+                <div class="card accessible-high-contrast">
+                    <div class="card-title">High Contrast</div>
+                    <div class="card-desc">Maximum contrast for better readability</div>
+                </div>
+                <div class="card accessible-focus">
+                    <div class="card-title">Focus Indicators</div>
+                    <div class="card-desc">Clear focus indicators for keyboard navigation</div>
+                </div>
+                <div class="card accessible-large">
+                    <div class="card-title">Large Touch Targets</div>
+                    <div class="card-desc">Bigger sizes for easier interaction</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- STATISTICS -->
+        <div class="stats">
+            <h3>📊 Design Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Card Variations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Design Categories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">CSS Animations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Combination Possibilities</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

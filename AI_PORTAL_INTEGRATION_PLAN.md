@@ -114,7 +114,7 @@ graph TB
 - Backend processing
 
 ### **Integration Sources:**
-- Agentic_Chatbot - autonomous AI assistant system
+- AgenticChatbot
 - Beta testing application
 - Training data management
 
@@ -180,7 +180,7 @@ graph TB
 
 ```
 ai-portal/
-├── frontend/
+├── Frontend/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── Profile/
@@ -197,7 +197,7 @@ ai-portal/
 │   ├── api/
 │   ├── core/
 │   ├── integrations/
-│   └── app.py
+│   └── App.py
 ├── integrations/
 │   ├── futuristic_dashboard/
 │   ├── agentic_chatbot/
@@ -223,7 +223,7 @@ ai-portal/
 
 ### **Phase 3: AI Services Integration**
 - Agentic chatbot
-- Avatar generator
+- AvatarGenerator
 - News app
 
 ### **Phase 4: Advanced Features**
@@ -247,6 +247,9 @@ ai-portal/
 5. **Create the training interface**
 
 **Ready to start building this incredible AI portal?**
+
+
+
 
 
 

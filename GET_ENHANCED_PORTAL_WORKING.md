@@ -3,7 +3,7 @@
 ## 🎯 **CURRENT STATUS**
 
 **✅ GOOD NEWS:** Your Enhanced AI Portal is ready and configured for port 6000!
-**⚠️ ISSUE:** The original `app.py` has import errors that prevent it from starting.
+**⚠️ ISSUE:** The original `App.py` has import errors that prevent it from starting.
 
 ---
 
@@ -14,7 +14,7 @@ I've created a simplified version that will work without import errors:
 ### **1. Start the Simplified Portal**
 ```bash
 # Navigate to AI Portal directory
-cd "AI_Portal - AI project management portal"
+cd "AIPortal"
 
 # Start the simplified app (no import errors)
 python3 app_simple.py
@@ -51,7 +51,7 @@ python3 app_simple.py
 
 ## 🔍 **WHY THE ORIGINAL APP FAILED**
 
-The original `app.py` tries to import:
+The original `App.py` tries to import:
 ```python
 from core.avatar_engine.avatar_creator import AvatarCreator
 from core.ai_assistant.personal_ai import PersonalAIAssistant
@@ -168,7 +168,7 @@ You now have a **professional-grade, personalized AI portal** running on **port 
 
 ```bash
 # Navigate to AI Portal directory
-cd "AI_Portal - AI project management portal"
+cd "AIPortal"
 
 # Start the simplified enhanced portal
 python3 app_simple.py
@@ -190,6 +190,9 @@ If you encounter any issues:
 4. Use the simplified app: `python3 app_simple.py`
 
 **Happy coding with your new Enhanced AI Portal! 🚀**
+
+
+
 
 
 

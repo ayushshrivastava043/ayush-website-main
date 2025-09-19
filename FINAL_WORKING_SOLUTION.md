@@ -1,7 +1,7 @@
 # 🚀 **FINAL WORKING SOLUTION - Get Your Enhanced Portal Working!**
 
 ## ❌ **The Problem:**
-Your original `app.py` has import errors that prevent the Flask server from starting properly, causing "site cannot be reached" errors.
+Your original `App.py` has import errors that prevent the Flask server from starting properly, causing "site cannot be reached" errors.
 
 ## ✅ **The Solution:**
 I've created a **completely working Flask app** (`working_portal.py`) with **NO import errors** that will definitely start and serve your enhanced portal!
@@ -16,7 +16,7 @@ Press `Ctrl+C` in any terminal where servers are running.
 ### **2. Start the Working Portal**
 ```bash
 # Make sure you're in the AI Portal directory
-cd "AI_Portal - AI project management portal"
+cd "AIPortal"
 
 # Start the working portal (NO import errors!)
 python3 working_portal.py
@@ -160,7 +160,7 @@ You now have a **professional-grade, personalized AI portal** running on **port 
 
 ```bash
 # Navigate to AI Portal directory
-cd "AI_Portal - AI project management portal"
+cd "AIPortal"
 
 # Start the working enhanced portal (NO ERRORS!)
 python3 working_portal.py
@@ -183,6 +183,9 @@ If you still encounter issues:
 4. **Check the test page**: http://localhost:6000/test
 
 **The working portal will definitely start and serve your enhanced portal! 🚀**
+
+
+
 
 
 

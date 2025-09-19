@@ -1,0 +1,36 @@
+{
+  "visitors": {
+    "aa574feb45130a86": {
+      "id": "aa574feb45130a86",
+      "ip": "::1",
+      "firstVisit": "2025-09-19T09:15:16.491Z",
+      "lastVisit": "2025-09-19T09:15:16.508Z",
+      "totalVisits": 2,
+      "pages": [
+        "/assets/AI_sample.mp4",
+        "/assets/Vedic%20Age%20AI%20video.mp4"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "referer": "http://localhost:4000/",
+      "sessions": [
+        {
+          "start": "2025-09-19T09:15:16.491Z",
+          "end": "2025-09-19T09:15:16.508Z",
+          "pages": [
+            "/assets/AI_sample.mp4",
+            "/assets/Vedic%20Age%20AI%20video.mp4"
+          ],
+          "duration": 17
+        }
+      ]
+    }
+  },
+  "stats": {
+    "total": 1270,
+    "unique": 13,
+    "today": 1270,
+    "thisWeek": 13,
+    "thisMonth": 13
+  },
+  "lastUpdated": "2025-09-19T09:15:16.509Z"
+}

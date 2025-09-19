@@ -49,7 +49,7 @@ website/
 ├── 📦 backup/                    # Essential server backups
 │   ├── server.js
 │   ├── server-manager.js
-│   ├── simple_server.py
+│   ├── SimpleServer.py
 │   ├── launch.sh
 │   └── server.log
 │

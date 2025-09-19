@@ -1,0 +1,82 @@
+{
+  "version": 2,
+  "name": "ayush-portal",
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/pages/(.*)",
+      "dest": "/pages/$1"
+    },
+    {
+      "src": "/projects/(.*)",
+      "dest": "/projects/$1"
+    },
+    {
+      "src": "/src/(.*)",
+      "dest": "/src/$1"
+    },
+    {
+      "src": "/server/(.*)",
+      "dest": "/server/$1"
+    },
+    {
+      "src": "/workflow_diagrams_api/(.*)",
+      "dest": "/workflow_diagrams_api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "server/chatbot-dashboard.js": {
+      "runtime": "nodejs18.x"
+    },
+    "server/unified-server.js": {
+      "runtime": "nodejs18.x"
+    },
+    "workflow_diagrams_api/diagram_server.py": {
+      "runtime": "python3.9"
+    }
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

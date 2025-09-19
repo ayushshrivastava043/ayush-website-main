@@ -341,7 +341,7 @@ export function renderConstellation(targetId) {
                 },
                 {
                     title: 'Solution',
-                    content: 'Created D3-based neural tree UI, Power BI dashboard, and implemented editable frontend components.'
+                    content: 'Created D3-based neural tree UI, Power BI dashboard, and implemented editable Frontend components.'
                 },
                 {
                     title: 'Impact',

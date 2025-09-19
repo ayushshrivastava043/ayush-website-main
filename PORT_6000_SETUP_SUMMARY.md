@@ -25,7 +25,7 @@
 
 ### **1. Navigate to AI Portal Directory**
 ```bash
-cd "AI_Portal - AI project management portal"
+cd "AIPortal"
 ```
 
 ### **2. Check Port Availability**
@@ -37,7 +37,7 @@ lsof -i :6000
 ### **3. Start the Enhanced Portal**
 ```bash
 # Start the server (will use port 6000 automatically)
-python3 app.py
+python3 App.py
 ```
 
 ### **4. Access Your Portal**
@@ -57,7 +57,7 @@ class Config:
     DEBUG = True
 ```
 
-### **2. `app.py` - Flask Application**
+### **2. `App.py` - Flask Application**
 - Updated to use port 6000 from configuration
 - Enhanced startup messages with port information
 - New API endpoints for enhanced portal
@@ -215,6 +215,9 @@ If you encounter any issues:
 4. Ensure all template files exist
 
 **Happy coding with your new Enhanced AI Portal! 🎉**
+
+
+
 
 
 

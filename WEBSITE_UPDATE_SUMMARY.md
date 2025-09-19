@@ -210,7 +210,7 @@ python3 -m http.server 8000
 ## 📁 **File Structure**
 
 ```
-Website - main website project/
+WebsiteMain/
 ├── assets/js/
 │   ├── enhanced-chatbot-widget.js      # New enhanced widget
 │   ├── chatbot-widget-backup.js        # Backup of original

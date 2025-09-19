@@ -7,6 +7,17 @@ const path = require('path');
 const net = require('net');
 const { EventEmitter } = require('events');
 
+// Visitor tracking configuration
+const VISITOR_CONFIG = {
+    logFile: path.join(__dirname, '..', 'logs', 'visitors.json'),
+    maxVisitors: 1000,
+    sessionTimeout: 30 * 60 * 1000, // 30 minutes
+    trackUserAgent: true,
+    trackReferer: true,
+    trackIP: true,
+    trackPages: true
+};
+
 // Check if WebSocket is available
 let WebSocket;
 try {
@@ -27,7 +38,7 @@ const CONFIG = {
     // AI Assistant server (HTTP + WebSocket)
     aiAssistant: {
         port: 8000,
-        enabled: false,
+        enabled: true,
         description: "AI Assistant with WebSocket support"
     },
     // WebSocket only server
@@ -72,12 +83,20 @@ class UnifiedServer extends EventEmitter {
         this.servers = new Map();
         this.websocketServers = new Map();
         this.connections = new Map();
+        this.visitors = new Map();
         this.stats = {
             totalRequests: 0,
             activeConnections: 0,
             errors: 0,
             startTime: Date.now(),
-            servers: {}
+            servers: {},
+            visitors: {
+                total: 0,
+                unique: 0,
+                today: 0,
+                thisWeek: 0,
+                thisMonth: 0
+            }
         };
         
         // Initialize stats for each server type
@@ -90,6 +109,265 @@ class UnifiedServer extends EventEmitter {
                 };
             }
         });
+
+        // Load existing visitor data
+        this.loadVisitorData();
+        
+        // Setup visitor cleanup interval
+        setInterval(() => {
+            this.cleanupExpiredVisitors();
+        }, 5 * 60 * 1000); // Every 5 minutes
+    }
+
+    // Load visitor data from file
+    loadVisitorData() {
+        try {
+            if (fs.existsSync(VISITOR_CONFIG.logFile)) {
+                const data = fs.readFileSync(VISITOR_CONFIG.logFile, 'utf8');
+                const visitorData = JSON.parse(data);
+                
+                // Restore visitor sessions
+                if (visitorData.visitors) {
+                    Object.entries(visitorData.visitors).forEach(([id, visitor]) => {
+                        this.visitors.set(id, visitor);
+                    });
+                }
+                
+                // Restore stats
+                if (visitorData.stats) {
+                    this.stats.visitors = { ...this.stats.visitors, ...visitorData.stats };
+                }
+                
+                console.log(`📊 Loaded ${this.visitors.size} visitor sessions`);
+            }
+        } catch (err) {
+            console.log('⚠️  Could not load visitor data:', err.message);
+        }
+    }
+
+    // Save visitor data to file
+    saveVisitorData() {
+        try {
+            // Ensure logs directory exists
+            const logsDir = path.dirname(VISITOR_CONFIG.logFile);
+            if (!fs.existsSync(logsDir)) {
+                fs.mkdirSync(logsDir, { recursive: true });
+            }
+
+            const data = {
+                visitors: Object.fromEntries(this.visitors),
+                stats: this.stats.visitors,
+                lastUpdated: new Date().toISOString()
+            };
+
+            fs.writeFileSync(VISITOR_CONFIG.logFile, JSON.stringify(data, null, 2));
+        } catch (err) {
+            console.error('❌ Could not save visitor data:', err.message);
+        }
+    }
+
+    // Track visitor
+    trackVisitor(req, res, page = '/') {
+        const ip = this.getClientIP(req);
+        const userAgent = req.headers['user-agent'] || 'Unknown';
+        const referer = req.headers.referer || 'Direct';
+        const timestamp = new Date();
+        
+        // Generate visitor ID (IP + User Agent hash)
+        const visitorId = this.generateVisitorId(ip, userAgent);
+        
+        // Check if visitor exists
+        let visitor = this.visitors.get(visitorId);
+        
+        if (!visitor) {
+            // New visitor
+            visitor = {
+                id: visitorId,
+                ip: VISITOR_CONFIG.trackIP ? ip : 'hidden',
+                firstVisit: timestamp,
+                lastVisit: timestamp,
+                totalVisits: 1,
+                pages: [page],
+                userAgent: VISITOR_CONFIG.trackUserAgent ? userAgent : 'hidden',
+                referer: VISITOR_CONFIG.trackReferer ? referer : 'hidden',
+                sessions: [{
+                    start: timestamp,
+                    end: timestamp,
+                    pages: [page],
+                    duration: 0
+                }]
+            };
+            
+            this.visitors.set(visitorId, visitor);
+            this.stats.visitors.unique++;
+            this.stats.visitors.today++;
+            this.stats.visitors.thisWeek++;
+            this.stats.visitors.thisMonth++;
+            
+            console.log(`👤 New visitor: ${ip} (${userAgent.split(' ')[0]})`);
+        } else {
+            // Existing visitor
+            visitor.lastVisit = timestamp;
+            visitor.totalVisits++;
+            
+            // Add page if not already visited
+            if (VISITOR_CONFIG.trackPages && !visitor.pages.includes(page)) {
+                visitor.pages.push(page);
+            }
+            
+            // Update current session
+            const currentSession = visitor.sessions[visitor.sessions.length - 1];
+            if (currentSession && (timestamp - currentSession.start) < VISITOR_CONFIG.sessionTimeout) {
+                currentSession.end = timestamp;
+                currentSession.duration = timestamp - currentSession.start;
+                if (VISITOR_CONFIG.trackPages && !currentSession.pages.includes(page)) {
+                    currentSession.pages.push(page);
+                }
+            } else {
+                // New session
+                visitor.sessions.push({
+                    start: timestamp,
+                    end: timestamp,
+                    pages: [page],
+                    duration: 0
+                });
+            }
+            
+            this.stats.visitors.today++;
+        }
+        
+        this.stats.visitors.total++;
+        
+        // Save visitor data periodically
+        if (this.stats.visitors.total % 10 === 0) {
+            this.saveVisitorData();
+        }
+        
+        return visitor;
+    }
+
+    // Generate visitor ID
+    generateVisitorId(ip, userAgent) {
+        const crypto = require('crypto');
+        const hash = crypto.createHash('md5');
+        hash.update(ip + userAgent);
+        return hash.digest('hex').substring(0, 16);
+    }
+
+    // Get client IP
+    getClientIP(req) {
+        return req.headers['x-forwarded-for'] || 
+               req.headers['x-real-ip'] || 
+               req.connection.remoteAddress || 
+               req.socket.remoteAddress ||
+               'unknown';
+    }
+
+    // Cleanup expired visitors
+    cleanupExpiredVisitors() {
+        const now = Date.now();
+        let cleaned = 0;
+        
+        this.visitors.forEach((visitor, id) => {
+            if (now - visitor.lastVisit.getTime() > VISITOR_CONFIG.sessionTimeout) {
+                this.visitors.delete(id);
+                cleaned++;
+            }
+        });
+        
+        if (cleaned > 0) {
+            console.log(`🧹 Cleaned up ${cleaned} expired visitor sessions`);
+            this.saveVisitorData();
+        }
+    }
+
+    // Get visitor analytics
+    getVisitorAnalytics() {
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const thisWeek = new Date(today.getTime() - (today.getDay() * 24 * 60 * 60 * 1000));
+        const thisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+        
+        let todayVisits = 0;
+        let weekVisits = 0;
+        let monthVisits = 0;
+        let totalSessions = 0;
+        let avgSessionDuration = 0;
+        let topPages = {};
+        let userAgents = {};
+        let referers = {};
+        
+        this.visitors.forEach(visitor => {
+            // Count visits by period
+            if (visitor.lastVisit >= today) todayVisits++;
+            if (visitor.lastVisit >= thisWeek) weekVisits++;
+            if (visitor.lastVisit >= thisMonth) monthVisits++;
+            
+            // Count sessions and duration
+            totalSessions += visitor.sessions.length;
+            let totalDuration = 0;
+            visitor.sessions.forEach(session => {
+                totalDuration += session.duration;
+            });
+            avgSessionDuration += totalDuration;
+            
+            // Count pages
+            visitor.pages.forEach(page => {
+                topPages[page] = (topPages[page] || 0) + 1;
+            });
+            
+            // Count user agents
+            const browser = this.parseUserAgent(visitor.userAgent);
+            userAgents[browser] = (userAgents[browser] || 0) + 1;
+            
+            // Count referers
+            const referer = visitor.referer === 'Direct' ? 'Direct' : 'External';
+            referers[referer] = (referers[referer] || 0) + 1;
+        });
+        
+        avgSessionDuration = totalSessions > 0 ? avgSessionDuration / totalSessions : 0;
+        
+        return {
+            summary: {
+                totalVisitors: this.visitors.size,
+                totalVisits: this.stats.visitors.total,
+                todayVisits,
+                weekVisits,
+                monthVisits,
+                totalSessions,
+                avgSessionDuration: Math.round(avgSessionDuration / 1000) // seconds
+            },
+            topPages: Object.entries(topPages)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 10),
+            userAgents: Object.entries(userAgents)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 10),
+            referers: Object.entries(referers)
+                .sort(([,a], [,b]) => b - a),
+            recentVisitors: Array.from(this.visitors.values())
+                .sort((a, b) => b.lastVisit - a.lastVisit)
+                .slice(0, 20)
+                .map(v => ({
+                    id: v.id,
+                    ip: v.ip,
+                    firstVisit: v.firstVisit,
+                    lastVisit: v.lastVisit,
+                    totalVisits: v.totalVisits,
+                    pages: v.pages.length,
+                    userAgent: this.parseUserAgent(v.userAgent)
+                }))
+        };
+    }
+
+    // Parse user agent to get browser info
+    parseUserAgent(userAgent) {
+        if (userAgent.includes('Chrome')) return 'Chrome';
+        if (userAgent.includes('Firefox')) return 'Firefox';
+        if (userAgent.includes('Safari')) return 'Safari';
+        if (userAgent.includes('Edge')) return 'Edge';
+        if (userAgent.includes('Opera')) return 'Opera';
+        return 'Other';
     }
 
     // Initialize the unified server
@@ -287,6 +565,17 @@ class UnifiedServer extends EventEmitter {
             return;
         }
 
+        // Visitor analytics endpoint
+        if (url === '/api/analytics' && method === 'GET') {
+            const analytics = this.getVisitorAnalytics();
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({
+                analytics,
+                timestamp: new Date().toISOString()
+            }));
+            return;
+        }
+
         // Chat API endpoint
         if (url === '/api/chat' && method === 'POST') {
             let body = '';
@@ -354,6 +643,10 @@ class UnifiedServer extends EventEmitter {
         this.stats.totalRequests++;
         this.stats.servers.website.requests++;
         
+        // Track visitor
+        const page = req.url === '/' ? '/index.html' : req.url;
+        this.trackVisitor(req, res, page);
+        
         // Add CORS headers if enabled
         if (CONFIG.global.cors) {
             res.setHeader('Access-Control-Allow-Origin', '*');
@@ -371,7 +664,10 @@ class UnifiedServer extends EventEmitter {
         // Parse URL and decode it properly
         let url = decodeURIComponent(req.url);
         
-
+        // Remove query parameters from URL for file serving
+        if (url.includes('?')) {
+            url = url.split('?')[0];
+        }
 
         if (url === '/') {
             url = '/index.html';

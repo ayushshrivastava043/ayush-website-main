@@ -50,9 +50,9 @@ graph TD
 │   └── stop.sh                   # System Stop
 │
 ├── 🌐 api/endpoints/             # Web Services
-│   ├── app_runner_enhanced.py    # MAIN FLASK SERVER
-│   ├── web_chat_interface.py     # Web UI
-│   └── test_backend.py           # Testing
+│   ├── AppRunner.py    # MAIN FLASK SERVER
+│   ├── WebChatInterface.py     # Web UI
+│   └── TestBackend.py           # Testing
 │
 ├── ⚙️ core/                      # Core System
 │   ├── config/                   # Configuration

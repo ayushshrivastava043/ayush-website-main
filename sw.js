@@ -1,8 +1,8 @@
-// Service Worker for caching chatbot assets - Optimized
-const CACHE_NAME = 'chatbot-cache-v2';
+// Service Worker for caching chatbot assets
+const CACHE_NAME = 'chatbot-cache-v3';
 const urlsToCache = [
-  'assets/chatbot-avatar-optimized.webp',
-  'assets/js/enhanced-chatbot-widget-optimized.js',
+  'assets/20250821-1758-Relaxed-Chatbot--unscreen-ezgif.com-apng-to-gif-converter.gif',
+  'assets/js/chatbot-widget.js',
   'assets/css/style.css'
 ];
 
@@ -17,7 +17,8 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.includes('chatbot') || event.request.url.includes('gif')) {
+  // Only cache GIF files, not JavaScript files
+  if (event.request.url.includes('gif') && !event.request.url.includes('.js')) {
     event.respondWith(
       caches.match(event.request)
         .then((response) => {
